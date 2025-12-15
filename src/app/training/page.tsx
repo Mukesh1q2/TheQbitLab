@@ -5,6 +5,7 @@ import {
   AvadhanHero,
   ModelUpload,
   DatasetUpload,
+  ModelPlayground,
   ChatbotCreator,
   SlotVisualizer,
   TrainingControls,
@@ -24,6 +25,8 @@ interface Project {
   id: string
   name: string
   status: string
+  modelPath?: string
+  trainingEpochs?: number
 }
 
 export default function TrainingPage() {
@@ -203,6 +206,19 @@ export default function TrainingPage() {
             isTraining={trainingStatus === 'training'}
           />
         </div>
+
+        {/* Model Playground - Test trained model */}
+        {project && (
+          <div className="mt-6">
+            <ModelPlayground
+              projectId={project.id}
+              modelPath={project.modelPath}
+              isModelReady={trainingStatus === 'completed' || currentEpoch > 0}
+              trainingEpochs={currentEpoch}
+              trainingStatus={trainingStatus}
+            />
+          </div>
+        )}
 
         {/* Epoch counter when training */}
         {trainingStatus === 'training' && currentEpoch > 0 && (
