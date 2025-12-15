@@ -1,0 +1,387 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+  profile       Profile?
+  orders        Order[]
+  inquiries     Inquiry[]
+  reviews       Review[]
+  conversations Conversation[]
+  bookings      Booking[]
+  avadhanSessions AvadhanSession[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Profile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  username        String   @unique
+  displayName     String
+  bio             String?
+  location        String?
+  website         String?
+  twitter         String?
+  github          String?
+  linkedin        String?
+  skills          String[] @default([])
+  experience      String?
+  education       String?
+  projectsCount   Int      @default(0)
+  servicesCount   Int      @default(0)
+  isPublic        Boolean  @default(true)
+  theme           String   @default("quantum")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projects        Project[]
+  services        Service[]
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  description String        @db.Text
+  content     String?       @db.Text
+  images      String[]      @default([])
+  demoUrl     String?
+  githubUrl   String?
+  techStack   String[]      @default([])
+  category    ProjectCategory
+  status      ProjectStatus @default(DRAFT)
+  featured    Boolean       @default(false)
+  priority    Int           @default(0)
+  stats       Json?         // { stars, forks, views, downloads }
+  profileId   String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  profile     Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  tags        Tag[]         @relation("ProjectTags")
+}
+
+model Service {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  description String        @db.Text
+  content     String?       @db.Text
+  price       Float?
+  currency    String        @default("USD")
+  duration    String?
+  category    ServiceCategory
+  features    String[]      @default([])
+  requirements String[]     @default([])
+  images      String[]      @default([])
+  available   Boolean       @default(true)
+  featured    Boolean       @default(false)
+  profileId   String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  profile     Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  bookings    Booking[]
+  inquiries   Inquiry[]
+  tags        Tag[]         @relation("ServiceTags")
+}
+
+model Product {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  description String        @db.Text
+  content     String?       @db.Text
+  price       Float
+  currency    String        @default("USD")
+  images      String[]      @default([])
+  files       ProductFile[]
+  category    ProductCategory
+  license     LicenseType   @default(SINGLE)
+  downloads   Int           @default(0)
+  featured    Boolean       @default(false)
+  published   Boolean       @default(false)
+  stripeId    String?       @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  reviews     Review[]
+  orderItems  OrderItem[]
+  tags        Tag[]         @relation("ProductTags")
+}
+
+model ProductFile {
+  id        String   @id @default(cuid())
+  productId String
+  name      String
+  size      Int
+  url       String
+  type      String
+  createdAt DateTime @default(now())
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id               String      @id @default(cuid())
+  userId           String
+  total            Float
+  currency         String      @default("USD")
+  status           OrderStatus @default(PENDING)
+  stripeSessionId  String?     @unique
+  stripePaymentId  String?
+  email            String
+  billingAddress   Json?
+  metadata         Json?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  user             User        @relation(fields: [userId], references: [id])
+  items            OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int     @default(1)
+  price     Float
+  license   LicenseType @default(SINGLE)
+
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  rating    Int      // 1-5
+  title     String?
+  content   String?  @db.Text
+  verified  Boolean  @default(false)
+  helpful   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+}
+
+model Inquiry {
+  id          String         @id @default(cuid())
+  userId      String?
+  serviceId   String?
+  name        String
+  email       String
+  company     String?
+  message     String         @db.Text
+  budget      String?
+  timeline    String?
+  status      InquiryStatus  @default(NEW)
+  assignedTo  String?
+  notes       String?        @db.Text
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  user        User?          @relation(fields: [userId], references: [id])
+  service     Service?       @relation(fields: [serviceId], references: [id])
+}
+
+model Booking {
+  id          String       @id @default(cuid())
+  userId      String
+  serviceId   String
+  date        DateTime
+  duration    Int          // minutes
+  type        BookingType  @default(CONSULTATION)
+  status      BookingStatus @default(PENDING)
+  meetingUrl  String?
+  notes       String?      @db.Text
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  service     Service      @relation(fields: [serviceId], references: [id])
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  mode      String   // playground mode
+  messages  Json[]   // Array of message objects
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model AvadhanSession {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  objectives  Json[]   // Array of objectives
+  threads     Json[]   // Array of thread data
+  results     Json?    // Final synthesized results
+  status      String   @default("ACTIVE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Tag {
+  id        String @id @default(cuid())
+  name      String @unique
+  color     String @default("#3B82F6")
+
+  projects  Project[] @relation("ProjectTags")
+  services  Service[] @relation("ServiceTags")
+  products  Product[] @relation("ProductTags")
+}
+
+model Analytics {
+  id        String   @id @default(cuid())
+  date      DateTime @unique
+  pageViews Int      @default(0)
+  uniqueVisitors Int @default(0)
+  bounceRate Float   @default(0)
+  avgSessionDuration Int @default(0) // seconds
+  conversions Int    @default(0)
+  revenue    Float   @default(0)
+  createdAt  DateTime @default(now())
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum ProjectCategory {
+  WEB_APP
+  MOBILE_APP
+  AI_ML
+  E_COMMERCE
+  SAAS
+  PORTFOLIO
+  API
+  DATABASE
+  DESIGN
+  OTHER
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ServiceCategory {
+  WEB_DEVELOPMENT
+  MOBILE_DEVELOPMENT
+  AI_CONSULTING
+  DESIGN
+  CONSULTING
+  MAINTENANCE
+  OTHER
+}
+
+enum ProductCategory {
+  UI_KIT
+  CODE_TEMPLATE
+  PLUGIN
+  THEME
+  ASSET
+  EBOOK
+  COURSE
+  TOOL
+}
+
+enum LicenseType {
+  SINGLE
+  MULTIPLE
+  EXTENDED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum InquiryStatus {
+  NEW
+  UNDER_REVIEW
+  QUOTED
+  ACCEPTED
+  REJECTED
+  COMPLETED
+}
+
+enum BookingType {
+  CONSULTATION
+  PROJECT_DISCUSSION
+  TECHNICAL_REVIEW
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}

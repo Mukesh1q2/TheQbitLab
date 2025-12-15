@@ -1,0 +1,62 @@
+
+> qbitlab@1.0.0 build
+> next build
+
+  Γû▓ Next.js 14.2.5
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/30) ...
+   Generating static pages (7/30) 
+   Generating static pages (14/30) 
+   Generating static pages (22/30) 
+ Γ£ô Generating static pages (30/30)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+Γöî Γùï /                                    246 kB          383 kB
+Γö£ Γùï /_not-found                          156 B          87.4 kB
+Γö£ Γùï /about                               10.6 kB         136 kB
+Γö£ Γùï /admin                               1.34 kB         106 kB
+Γö£ Γùï /admin/analytics                     2.32 kB         107 kB
+Γö£ Γùï /admin/contacts                      2.77 kB         107 kB
+Γö£ Γùï /admin/newsletter                    3.2 kB          108 kB
+Γö£ ╞Æ /api/analytics                       0 B                0 B
+Γö£ ╞Æ /api/auth/[...nextauth]              0 B                0 B
+Γö£ ╞Æ /api/contact                         0 B                0 B
+Γö£ ╞Æ /api/gemini                          0 B                0 B
+Γö£ ╞Æ /api/newsletter                      0 B                0 B
+Γö£ ╞Æ /api/openai/chat                     0 B                0 B
+Γö£ ╞Æ /api/projects                        0 B                0 B
+Γö£ ╞Æ /api/training/metrics/[id]           0 B                0 B
+Γö£ ╞Æ /api/training/projects               0 B                0 B
+Γö£ ╞Æ /api/training/projects/[id]          0 B                0 B
+Γö£ ╞Æ /api/training/slots/[id]             0 B                0 B
+Γö£ ╞Æ /api/training/start                  0 B                0 B
+Γö£ ╞Æ /api/training/status/[id]            0 B                0 B
+Γö£ ╞Æ /api/training/stop                   0 B                0 B
+Γö£ ╞Æ /api/training/upload                 0 B                0 B
+Γö£ Γùï /blog                                4.8 kB          130 kB
+Γö£ Γùï /contact                             10.4 kB         143 kB
+Γö£ Γùï /cookies                             156 B          87.4 kB
+Γö£ Γùï /marketplace                         15.2 kB         148 kB
+Γö£ Γùï /playground                          6.28 kB         143 kB
+Γö£ Γùï /privacy                             156 B          87.4 kB
+Γö£ Γùï /projects                            10.2 kB         143 kB
+Γö£ Γùï /services                            6.61 kB         132 kB
+Γö£ Γùï /sitemap.xml                         0 B                0 B
+Γö£ Γùï /terms                               156 B          87.4 kB
+Γöö Γùï /training                            19.2 kB         152 kB
++ First Load JS shared by all            87.3 kB
+  Γö£ chunks/23-7600904d5f8e2e8f.js        31.7 kB
+  Γö£ chunks/fd9d1056-8c56979bf1c426b0.js  53.6 kB
+  Γöö other shared chunks (total)          1.97 kB
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+

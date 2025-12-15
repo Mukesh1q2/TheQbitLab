@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheQbitlabs - Theme Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Theme Variables */
+        :root {
+            --quantum-primary: #8B5CF6;
+            --quantum-secondary: #06B6D4;
+            --quantum-accent: #F59E0B;
+            --quantum-bg: #0F0F23;
+            --quantum-surface: #1E1B4B;
+            --quantum-text: #E2E8F0;
+            
+            --minimalist-primary: #000000;
+            --minimalist-secondary: #666666;
+            --minimalist-accent: #FF6B6B;
+            --minimalist-bg: #FFFFFF;
+            --minimalist-surface: #F8F9FA;
+            --minimalist-text: #212529;
+            
+            --terminal-primary: #00FF00;
+            --terminal-secondary: #008000;
+            --terminal-accent: #FF0000;
+            --terminal-bg: #000000;
+            --terminal-surface: #001100;
+            --terminal-text: #00FF00;
+            
+            --neumorphic-primary: #E2E8F0;
+            --neumorphic-secondary: #CBD5E0;
+            --neumorphic-accent: #4299E1;
+            --neumorphic-bg: #F7FAFC;
+            --neumorphic-surface: #EDF2F7;
+            --neumorphic-text: #2D3748;
+            
+            --retro-primary: #FF0080;
+            --retro-secondary: #8000FF;
+            --retro-accent: #00FFFF;
+            --retro-bg: #0A0A0A;
+            --retro-surface: #1A0D2E;
+            --retro-text: #FFFFFF;
+        }
+
+        /* Theme Classes */
+        .theme-quantum-neural {
+            --primary: var(--quantum-primary);
+            --secondary: var(--quantum-secondary);
+            --accent: var(--quantum-accent);
+            --bg: var(--quantum-bg);
+            --surface: var(--quantum-surface);
+            --text: var(--quantum-text);
+        }
+
+        .theme-minimalist-pro {
+            --primary: var(--minimalist-primary);
+            --secondary: var(--minimalist-secondary);
+            --accent: var(--minimalist-accent);
+            --bg: var(--minimalist-bg);
+            --surface: var(--minimalist-surface);
+            --text: var(--minimalist-text);
+        }
+
+        .theme-terminal-hacker {
+            --primary: var(--terminal-primary);
+            --secondary: var(--terminal-secondary);
+            --accent: var(--terminal-accent);
+            --bg: var(--terminal-bg);
+            --surface: var(--terminal-surface);
+            --text: var(--terminal-text);
+        }
+
+        .theme-neumorphic-glass {
+            --primary: var(--neumorphic-primary);
+            --secondary: var(--neumorphic-secondary);
+            --accent: var(--neumorphic-accent);
+            --bg: var(--neumorphic-bg);
+            --surface: var(--neumorphic-surface);
+            --text: var(--neumorphic-text);
+        }
+
+        .theme-retro-vaporwave {
+            --primary: var(--retro-primary);
+            --secondary: var(--retro-secondary);
+            --accent: var(--retro-accent);
+            --bg: var(--retro-bg);
+            --surface: var(--retro-surface);
+            --text: var(--retro-text);
+        }
+
+        /* Dynamic Styles */
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--bg);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .border-accent {
+            border-color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .float { animation: float 3s ease-in-out infinite; }
+        .glow { animation: glow 2s ease-in-out infinite; }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+
+        /* Theme Grid */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .theme-card {
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Component Demo */
+        .component-demo {
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 0.75rem;
+            border: 1px solid var(--primary);
+        }
+
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .capability-card {
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Terminal Theme Specific */
+        .theme-terminal-hacker {
+            font-family: 'Courier New', monospace;
+        }
+
+        .theme-terminal-hacker .hero-section {
+            background: linear-gradient(135deg, #000, #001100);
+            border: 2px solid var(--primary);
+        }
+
+        .theme-terminal-hacker .card {
+            border: 1px solid var(--primary);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Neumorphic Theme Specific */
+        .theme-neumorphic-glass {
+            background: var(--bg);
+        }
+
+        .theme-neumorphic-glass .card {
+            background: var(--surface);
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.1),
+                -8px -8px 16px rgba(255, 255, 255, 0.7);
+            border: none;
+        }
+
+        /* Quantum Neural Theme Specific */
+        .theme-quantum-neural {
+            background: var(--bg);
+        }
+
+        .theme-quantum-neural .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Retro Vaporwave Theme Specific */
+        .theme-retro-vaporwave {
+            background: var(--bg);
+        }
+
+        .theme-retro-vaporwave .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-retro-vaporwave .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.1) 2px,
+                rgba(255, 255, 255, 0.1) 4px
+            );
+            animation: float 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="theme-quantum-neural">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <header class="text-center py-8">
+            <h1 class="text-4xl font-bold mb-4">TheQbitlabs Portfolio Platform</h1>
+            <p class="text-xl opacity-80 mb-8">Advanced Theme System Demo</p>
+            
+            <!-- Theme Selector -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="switchTheme('quantum-neural')" class="btn-primary">Quantum Neural</button>
+                <button onclick="switchTheme('minimalist-pro')" class="btn-primary">Minimalist Pro</button>
+                <button onclick="switchTheme('terminal-hacker')" class="btn-primary">Terminal Hacker</button>
+                <button onclick="switchTheme('neumorphic-glass')" class="btn-primary">Neumorphic Glass</button>
+                <button onclick="switchTheme('retro-vaporwave')" class="btn-primary">Retro Vaporwave</button>
+            </div>
+        </header>
+
+        <!-- Theme Grid Demo -->
+        <div class="theme-grid">
+            <!-- Quantum Neural Theme -->
+            <div class="theme-card theme-quantum-neural">
+                <h3 class="text-2xl font-bold mb-4">Quantum Neural</h3>
+                <p class="mb-4">Futuristic neural network-inspired design with quantum computing aesthetics.</p>
+                <div class="space-y-2">
+                    <div class="card p-3 rounded">Primary: Purple Quantum</div>
+                    <div class="card p-3 rounded">Secondary: Cyan Wave</div>
+                    <div class="card p-3 rounded">Accent: Golden Pulse</div>
+                </div>
+            </div>
+
+            <!-- Minimalist Pro Theme -->
+            <div class="theme-card theme-minimalist-pro">
+                <h3 class="text-2xl font-bold mb-4">Minimalist Pro</h3>
+                <p class="mb-4">Clean, professional design with maximum impact and minimal complexity.</p>
+                <div class="space-y-2">
+                    <div class="card p-3 rounded">Primary: Pure Black</div>
+                    <div class="card p-3 rounded">Secondary: Subtle Gray</div>
+                    <div class="card p-3 rounded">Accent: Bold Red</div>
+                </div>
+            </div>
+
+            <!-- Terminal Hacker Theme -->
+            <div class="theme-card theme-terminal-hacker">
+                <h3 class="text-2xl font-bold mb-4">Terminal Hacker</h3>
+                <p class="mb-4">Classic terminal/console aesthetic for developers and tech enthusiasts.</p>
+                <div class="space-y-2">
+                    <div class="card p-3 rounded">Primary: Matrix Green</div>
+                    <div class="card p-3 rounded">Secondary: Dark Green</div>
+                    <div class="card p-3 rounded">Accent: Alert Red</div>
+                </div>
+            </div>
+
+            <!-- Neumorphic Glass Theme -->
+            <div class="theme-card theme-neumorphic-glass">
+                <h3 class="text-2xl font-bold mb-4">Neumorphic Glass</h3>
+                <p class="mb-4">Soft, glass-like interface with subtle shadows and depth.</p>
+                <div class="space-y-2">
+                    <div class="card p-3 rounded">Primary: Soft White</div>
+                    <div class="card p-3 rounded">Secondary: Light Gray</div>
+                    <div class="card p-3 rounded">Accent: Ocean Blue</div>
+                </div>
+            </div>
+
+            <!-- Retro Vaporwave Theme -->
+            <div class="theme-card theme-retro-vaporwave">
+                <h3 class="text-2xl font-bold mb-4">Retro Vaporwave</h3>
+                <p class="mb-4">80s-inspired retro-futuristic design with neon aesthetics.</p>
+                <div class="space-y-2">
+                    <div class="card p-3 rounded">Primary: Hot Pink</div>
+                    <div class="card p-3 rounded">Secondary: Purple Dream</div>
+                    <div class="card p-3 rounded">Accent: Electric Cyan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Demo Section -->
+        <div class="component-demo">
+            <h2 class="text-3xl font-bold text-center mb-8">Component Showcase</h2>
+            
+            <!-- Hero Section Demo -->
+            <div class="hero-section float">
+                <h1 class="text-5xl font-bold mb-4">Welcome to TheQbitlabs</h1>
+                <p class="text-xl mb-6">Building the future with cutting-edge technology</p>
+                <button class="btn-primary text-lg">Get Started</button>
+            </div>
+
+            <!-- Stats Section Demo -->
+            <div class="stats-grid">
+                <div class="stat-card glow">
+                    <div class="text-3xl font-bold text-accent">500+</div>
+                    <div class="text-sm opacity-80">Projects Completed</div>
+                </div>
+                <div class="stat-card pulse">
+                    <div class="text-3xl font-bold text-accent">50+</div>
+                    <div class="text-sm opacity-80">Happy Clients</div>
+                </div>
+                <div class="stat-card float">
+                    <div class="text-3xl font-bold text-accent">5+</div>
+                    <div class="text-sm opacity-80">Years Experience</div>
+                </div>
+                <div class="stat-card glow">
+                    <div class="text-3xl font-bold text-accent">24/7</div>
+                    <div class="text-sm opacity-80">Support Available</div>
+                </div>
+            </div>
+
+            <!-- Capabilities Matrix Demo -->
+            <div class="capability-grid">
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">Frontend Development</h4>
+                    <p class="text-sm opacity-80">React, Next.js, TypeScript, Tailwind CSS</p>
+                </div>
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">Backend Development</h4>
+                    <p class="text-sm opacity-80">Node.js, Python, Database Design, APIs</p>
+                </div>
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">AI & Machine Learning</h4>
+                    <p class="text-sm opacity-80">OpenAI, TensorFlow, Computer Vision</p>
+                </div>
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">3D & Graphics</h4>
+                    <p class="text-sm opacity-80">Three.js, WebGL, Animation, Visualization</p>
+                </div>
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">Cloud & DevOps</h4>
+                    <p class="text-sm opacity-80">AWS, Docker, CI/CD, Infrastructure</p>
+                </div>
+                <div class="capability-card">
+                    <h4 class="text-xl font-semibold mb-2">Mobile Development</h4>
+                    <p class="text-sm opacity-80">React Native, Flutter, PWA Development</p>
+                </div>
+            </div>
+
+            <!-- Testimonial Card Demo -->
+            <div class="card p-6 rounded-lg max-w-md mx-auto">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl">
+                        JD
+                    </div>
+                    <p class="italic mb-4">"Outstanding work! TheQbitlabs delivered beyond our expectations."</p>
+                    <div class="font-semibold">John Doe</div>
+                    <div class="text-sm opacity-80">CEO, Tech Corp</div>
+                    <div class="flex justify-center mt-2">
+                        <span class="text-accent">★★★★★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-opacity-20 border-white mt-12">
+            <p class="opacity-60">© 2025 TheQbitlabs. Built with Next.js, TypeScript, and Tailwind CSS.</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTheme(themeName) {
+            const body = document.body;
+            
+            // Remove all theme classes
+            body.classList.remove('theme-quantum-neural', 'theme-minimalist-pro', 'theme-terminal-hacker', 'theme-neumorphic-glass', 'theme-retro-vaporwave');
+            
+            // Add the selected theme
+            body.classList.add(`theme-${themeName}`);
+            
+            // Show notification
+            showNotification(`Switched to ${themeName.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} theme`);
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-black text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300';
+            notification.textContent = message;
+            
+            // Add to body
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize theme notification
+        document.addEventListener('DOMContentLoaded', function() {
+            showNotification('Welcome! Try switching between themes to see the magic ✨');
+        });
+    </script>
+</body>
+</html>

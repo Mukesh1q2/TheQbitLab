@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@theqbitlabs.com",
+      "name": "TheQbitlabs",
+      "role": "ADMIN",
+      "createdAt": "2025-12-10T16:21:15.480Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "AI-Powered Analytics Dashboard",
+      "description": "Real-time data visualization with ML predictions",
+      "category": "AI/ML",
+      "tags": [
+        "React",
+        "Python",
+        "TensorFlow"
+      ],
+      "status": "COMPLETED",
+      "createdAt": "2025-12-10T16:21:15.480Z"
+    },
+    {
+      "id": "2",
+      "title": "E-commerce Platform",
+      "description": "Full-featured online store with admin panel",
+      "category": "SaaS",
+      "tags": [
+        "Next.js",
+        "Stripe",
+        "PostgreSQL"
+      ],
+      "status": "COMPLETED",
+      "createdAt": "2025-12-10T16:21:15.480Z"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "1",
+      "title": "Getting Started with AI Development",
+      "slug": "getting-started-ai-development",
+      "content": "This is a sample blog post about AI development...",
+      "excerpt": "Learn the fundamentals of AI development...",
+      "published": true,
+      "authorId": "1",
+      "createdAt": "2025-12-10T16:21:15.480Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "name": "AI Development",
+      "description": "Custom AI solutions and LLM integration",
+      "price": 5000,
+      "category": "development",
+      "features": [
+        "Consultation",
+        "Development",
+        "Deployment",
+        "Support"
+      ]
+    }
+  ]
+}
