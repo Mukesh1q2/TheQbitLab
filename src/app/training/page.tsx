@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from 'react'
 import {
   AvadhanHero,
   ModelUpload,
+  DatasetUpload,
   ChatbotCreator,
   SlotVisualizer,
   TrainingControls,
@@ -58,6 +59,10 @@ export default function TrainingPage() {
 
   const handleUploadComplete = useCallback((data: { filepath: string; format: string }) => {
     console.log('Model uploaded:', data)
+  }, [])
+
+  const handleDatasetUploadComplete = useCallback((data: { datasetId: string; stats: any }) => {
+    console.log('Dataset uploaded:', data)
   }, [])
 
   const handleStart = useCallback(async () => {
@@ -159,6 +164,11 @@ export default function TrainingPage() {
             <ModelUpload
               projectId={project?.id}
               onUploadComplete={handleUploadComplete}
+            />
+
+            <DatasetUpload
+              projectId={project?.id}
+              onUploadComplete={handleDatasetUploadComplete}
             />
 
             <TrainingControls
