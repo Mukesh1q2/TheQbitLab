@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
-import { prisma } from '@/lib/prisma'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 // POST /api/training/upload - Upload model file
 export async function POST(request: NextRequest) {
@@ -44,6 +52,7 @@ export async function POST(request: NextRequest) {
         await writeFile(filepath, buffer)
 
         // Update project with model path
+        const prisma = await getPrisma()
         const project = await prisma.avadhanSession.update({
             where: { id: projectId },
             data: {
@@ -91,3 +100,4 @@ function formatBytes(bytes: number): string {
     const i = Math.floor(Math.log(bytes) / Math.log(k))
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
 }
+

@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { getEngineState, trainingStep } from '@/lib/avadhan'
 import { engineInstances } from '../../start/route'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 interface RouteParams {
     params: { id: string }
@@ -17,6 +25,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
         if (!engine) {
             // Get from database if no active session
+            const prisma = await getPrisma()
             const project = await prisma.avadhanSession.findUnique({
                 where: { id: projectId },
             })
@@ -53,6 +62,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             if (engine.currentEpoch % 10 === 0) {
                 const latestMetrics = engine.metrics[engine.metrics.length - 1]
                 if (latestMetrics) {
+                    const prisma = await getPrisma()
                     await prisma.avadhanSession.update({
                         where: { id: projectId },
                         data: {
@@ -80,3 +90,4 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         )
     }
 }
+

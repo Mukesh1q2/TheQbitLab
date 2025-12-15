@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { sendEmail } from '@/lib/email'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+  const { prisma } = await import('@/lib/prisma')
+  return prisma
+}
 
 const ContactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -19,6 +27,7 @@ export async function POST(request: NextRequest) {
     const validatedData = ContactSchema.parse(body)
 
     // Save to database
+    const prisma = await getPrisma()
     const contact = await prisma.inquiry.create({
       data: {
         name: validatedData.name,
@@ -110,6 +119,7 @@ export async function GET(request: NextRequest) {
       where.status = status
     }
 
+    const prisma = await getPrisma()
     const contacts = await prisma.inquiry.findMany({
       where,
       skip: (page - 1) * limit,

@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 // Type for Avadhan session project
 interface AvadhanProject {
@@ -13,6 +21,7 @@ interface AvadhanProject {
 // GET /api/training/projects - List all training projects
 export async function GET() {
     try {
+        const prisma = await getPrisma()
         const projects = await prisma.avadhanSession.findMany({
             orderBy: { createdAt: 'desc' },
             take: 50,
@@ -61,6 +70,7 @@ export async function POST(request: NextRequest) {
             energyConstraint: true,
         }
 
+        const prisma = await getPrisma()
         const project = await prisma.avadhanSession.create({
             data: {
                 title: name,
@@ -89,3 +99,4 @@ export async function POST(request: NextRequest) {
         )
     }
 }
+

@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import { prisma } from '@/lib/prisma'
+import { PrismaClient } from '@prisma/client'
 
 declare module 'next-auth' {
   interface Session {
@@ -14,6 +14,19 @@ declare module 'next-auth' {
     }
   }
 }
+
+// Lazy-load prisma client for Vercel deployment
+const prismaClientSingleton = () => {
+  return new PrismaClient()
+}
+
+declare const globalThis: {
+  prismaGlobal: PrismaClient | undefined
+} & typeof global
+
+const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
+
+if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),

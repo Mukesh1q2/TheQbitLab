@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createChatCompletion } from '@/lib/openai'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+  const { prisma } = await import('@/lib/prisma')
+  return prisma
+}
 
 const ChatSchema = z.object({
   messages: z.array(z.object({
@@ -23,6 +31,7 @@ export async function POST(request: NextRequest) {
     // Save conversation to database if userId provided
     let conversation = null
     if (validatedData.userId) {
+      const prisma = await getPrisma()
       conversation = await prisma.conversation.create({
         data: {
           userId: validatedData.userId,
@@ -43,6 +52,7 @@ export async function POST(request: NextRequest) {
 
     // Update conversation with response (add assistant message)
     if (conversation) {
+      const prisma = await getPrisma()
       const updatedMessages = [...validatedData.messages, completion.choices[0].message] as any
       await prisma.conversation.update({
         where: { id: conversation.id },
@@ -60,7 +70,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error in OpenAI chat:', error)
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request data', details: error.errors },
@@ -83,6 +93,8 @@ export async function GET(request: NextRequest) {
     const conversationId = searchParams.get('conversationId')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
+
+    const prisma = await getPrisma()
 
     if (conversationId) {
       // Get specific conversation
@@ -165,6 +177,8 @@ export async function DELETE(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    const prisma = await getPrisma()
 
     // Check if conversation exists and user owns it
     const conversation = await prisma.conversation.findUnique({

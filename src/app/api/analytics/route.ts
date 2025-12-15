@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+  const { prisma } = await import('@/lib/prisma')
+  return prisma
+}
 
 // Type for analytics record
 interface AnalyticsRecord {
@@ -33,6 +42,7 @@ export async function POST(request: NextRequest) {
     today.setHours(0, 0, 0, 0)
 
     // Create or update today's analytics
+    const prisma = await getPrisma()
     const analytics = await prisma.analytics.upsert({
       where: {
         date: today,
@@ -86,6 +96,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    const prisma = await getPrisma()
     const analytics = await prisma.analytics.findMany({
       where,
       orderBy: { date: 'desc' },

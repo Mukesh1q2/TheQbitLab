@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+  const { prisma } = await import('@/lib/prisma')
+  return prisma
+}
 
 const ProjectSchema = z.object({
   title: z.string().min(1),
@@ -24,15 +32,16 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
 
     const where: any = { published: true }
-    
+
     if (category) {
       where.category = category
     }
-    
+
     if (featured === 'true') {
       where.featured = true
     }
 
+    const prisma = await getPrisma()
     const projects = await prisma.project.findMany({
       where,
       skip: (page - 1) * limit,
@@ -70,6 +79,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const validatedData = ProjectSchema.parse(body)
 
+    const prisma = await getPrisma()
     const project = await prisma.project.create({
       data: {
         title: validatedData.title,

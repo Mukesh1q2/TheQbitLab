@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { stopTraining, pauseTraining, getEngineState } from '@/lib/avadhan'
 import { engineInstances } from '../start/route'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 // POST /api/training/stop - Stop or pause training
 export async function POST(request: NextRequest) {
@@ -25,6 +33,8 @@ export async function POST(request: NextRequest) {
                 { status: 404 }
             )
         }
+
+        const prisma = await getPrisma()
 
         // Apply action
         if (action === 'pause') {
@@ -56,3 +66,4 @@ export async function POST(request: NextRequest) {
         )
     }
 }
+

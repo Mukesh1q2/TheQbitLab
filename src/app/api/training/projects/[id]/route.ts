@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 interface RouteParams {
     params: { id: string }
@@ -8,6 +16,7 @@ interface RouteParams {
 // GET /api/training/projects/[id] - Get project details
 export async function GET(request: NextRequest, { params }: RouteParams) {
     try {
+        const prisma = await getPrisma()
         const project = await prisma.avadhanSession.findUnique({
             where: { id: params.id },
         })
@@ -47,6 +56,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         const body = await request.json()
         const { title, objectives, threads, status, results } = body
 
+        const prisma = await getPrisma()
         const project = await prisma.avadhanSession.update({
             where: { id: params.id },
             data: {
@@ -79,6 +89,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 // DELETE /api/training/projects/[id] - Delete project
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
     try {
+        const prisma = await getPrisma()
         await prisma.avadhanSession.delete({
             where: { id: params.id },
         })
@@ -92,3 +103,4 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
         )
     }
 }
+

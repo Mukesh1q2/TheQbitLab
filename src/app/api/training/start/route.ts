@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import {
     createEngine,
     initializeSlots,
@@ -7,6 +6,15 @@ import {
     getEngineState,
     DEFAULT_ASHTA_CONFIG
 } from '@/lib/avadhan'
+
+// Force dynamic rendering - prevents build-time data collection
+export const dynamic = 'force-dynamic'
+
+// Lazy load prisma to avoid build-time initialization issues
+const getPrisma = async () => {
+    const { prisma } = await import('@/lib/prisma')
+    return prisma
+}
 
 // In-memory engine instances (in production, use Redis or similar)
 const engineInstances = new Map<string, ReturnType<typeof createEngine>>()
@@ -25,6 +33,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Check project exists
+        const prisma = await getPrisma()
         const project = await prisma.avadhanSession.findUnique({
             where: { id: projectId },
         })
@@ -77,3 +86,4 @@ export async function POST(request: NextRequest) {
 
 // Export engine instances for other routes
 export { engineInstances }
+
