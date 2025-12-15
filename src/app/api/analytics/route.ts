@@ -3,12 +3,12 @@ import { z } from 'zod'
 
 // Force dynamic rendering - prevents build-time data collection
 export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
+export const fetchCache = 'force-no-store'
+export const revalidate = 0
 
-// Lazy load prisma to avoid build-time initialization issues
-const getPrisma = async () => {
-  const { prisma } = await import('@/lib/prisma')
-  return prisma
+// Check if we're in build mode (no database available)
+const isBuildTime = () => {
+  return !process.env.DATABASE_URL || process.env.NEXT_PHASE === 'phase-production-build'
 }
 
 // Type for analytics record
@@ -34,15 +34,19 @@ const AnalyticsSchema = z.object({
 
 // POST /api/analytics - Create daily analytics record
 export async function POST(request: NextRequest) {
+  // Skip during build
+  if (isBuildTime()) {
+    return NextResponse.json({ success: false, error: 'Service unavailable during build' }, { status: 503 })
+  }
+
   try {
+    const { prisma } = await import('@/lib/prisma')
     const body = await request.json()
     const validatedData = AnalyticsSchema.parse(body)
 
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 
-    // Create or update today's analytics
-    const prisma = await getPrisma()
     const analytics = await prisma.analytics.upsert({
       where: {
         date: today,
@@ -78,7 +82,16 @@ export async function POST(request: NextRequest) {
 
 // GET /api/analytics - Get analytics data
 export async function GET(request: NextRequest) {
+  // Skip during build
+  if (isBuildTime()) {
+    return NextResponse.json({
+      analytics: [],
+      summary: { totalRecords: 0, totalPageViews: 0, totalUniqueVisitors: 0, avgBounceRate: 0 }
+    })
+  }
+
   try {
+    const { prisma } = await import('@/lib/prisma')
     const { searchParams } = new URL(request.url)
     const startDate = searchParams.get('startDate')
     const endDate = searchParams.get('endDate')
@@ -96,14 +109,12 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    const prisma = await getPrisma()
     const analytics = await prisma.analytics.findMany({
       where,
       orderBy: { date: 'desc' },
       take: limit,
     })
 
-    // Get summary statistics
     const totalRecords = await prisma.analytics.count({ where })
     const totalPageViews = analytics.reduce((sum: number, record: AnalyticsRecord) => sum + record.pageViews, 0)
     const totalUniqueVisitors = analytics.reduce((sum: number, record: AnalyticsRecord) => sum + record.uniqueVisitors, 0)
