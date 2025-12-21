@@ -27,78 +27,123 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'ai-chat-platform',
-    title: 'AI Chat Platform',
-    description: 'Advanced conversational AI platform with multi-model support, real-time streaming, and custom prompt engineering capabilities.',
-    image: '/images/projects/ai-chat-platform.jpg',
-    category: 'ai',
-    techStack: ['Next.js', 'OpenAI', 'TypeScript', 'Prisma', 'PostgreSQL'],
-    demoUrl: 'https://ai-chat-platform.vercel.app',
-    githubUrl: 'https://github.com/theqbitlabs/ai-chat-platform',
-    stats: { stars: 1247, forks: 234, views: 15670 },
-    featured: true,
-    caseStudy: '/case-studies/ai-chat-platform',
-  },
-  {
-    id: 'quantum-portfolio',
-    title: 'Quantum Portfolio',
-    description: 'Revolutionary 3D portfolio with neural network visualizations, particle systems, and AI-powered content generation.',
-    image: '/images/projects/quantum-portfolio.jpg',
-    category: 'web',
-    techStack: ['React', 'Three.js', 'WebGL', 'Framer Motion', 'Node.js'],
-    demoUrl: 'https://quantum-portfolio.dev',
-    githubUrl: 'https://github.com/theqbitlabs/quantum-portfolio',
-    stats: { stars: 892, forks: 156, views: 8934 },
-    featured: true,
-    caseStudy: '/case-studies/quantum-portfolio',
-  },
-  {
-    id: 'ml-pipeline',
-    title: 'ML Pipeline Studio',
-    description: 'Visual machine learning pipeline builder with drag-and-drop interface, autoML, and deployment automation.',
-    image: '/images/projects/ml-pipeline.jpg',
-    category: 'ai',
-    techStack: ['Vue.js', 'Python', 'FastAPI', 'Docker', 'Kubernetes'],
-    demoUrl: 'https://ml-pipeline.studio',
-    githubUrl: 'https://github.com/theqbitlabs/ml-pipeline',
-    stats: { stars: 567, forks: 89, views: 4521 },
-    featured: false,
-  },
-  {
-    id: 'saas-analytics',
-    title: 'SaaS Analytics Dashboard',
-    description: 'Comprehensive analytics platform for SaaS businesses with real-time metrics, predictive analytics, and custom reporting.',
-    image: '/images/projects/saas-analytics.jpg',
+    id: 'optibid-energy',
+    title: 'OptiBid Energy — AI-Powered Trading Platform',
+    description: 'Revolutionary enterprise-grade platform for real-time energy analytics, intelligent bidding, and visual knowledge graphs. Features ML models (TFT, N-BEATS, DeepAR), Kafka streaming, and multi-tenant enterprise security with 100+ documentation files.',
+    image: '/images/projects/optibid-energy.jpg',
     category: 'saas',
-    techStack: ['Next.js', 'D3.js', 'PostgreSQL', 'Redis', 'AWS'],
-    demoUrl: 'https://saas-analytics.app',
-    githubUrl: 'https://github.com/theqbitlabs/saas-analytics',
-    stats: { stars: 743, forks: 123, views: 9876 },
+    techStack: ['Next.js 14', 'TypeScript', 'Kafka', 'WebSocket', 'Docker', 'Kubernetes', 'ML/AI'],
+    demoUrl: 'https://optibid.theqbitlabs.com',
+    stats: { stars: 567, forks: 89, views: 8750 },
+    featured: true,
+    caseStudy: '/case-studies/optibid-energy',
+  },
+  {
+    id: 'brahm-ai',
+    title: 'Brahm AI — The "Deep Philosophy" Experiment',
+    description: 'This is where I get a bit experimental. It\'s an AI framework inspired by Vedic systems and vibrational computing. Moving beyond standard "if-this-then-that" logic to simulate higher-order cognition—a mix of symbolic AI and neural hybrids that explores how an AI might "perceive" or "remember" like a conscious entity.',
+    image: '/images/projects/brahm-ai.jpg',
+    category: 'ai',
+    techStack: ['Python', 'PyTorch', 'React 19', 'TypeScript', 'Firebase'],
+    demoUrl: 'https://brahm-ai.theqbitlabs.com',
+    githubUrl: 'https://github.com/Mukesh1q2/brahm-ai',
+    stats: { stars: 847, forks: 156, views: 12450 },
+    featured: true,
+    caseStudy: '/case-studies/brahm-ai',
+  },
+  {
+    id: 'vedaq-ai',
+    title: 'VedaQ AI — Spiritual Tech',
+    description: 'A full-stack app that brings ancient wisdom into the 21st century. It\'s got everything: karma-scoring algorithms, mantra playback, and an LLM that speaks English, Hindi, and "Hinglish." Coolest part: It generates custom images and music based on your journaling—basically a digital spiritual guide in your pocket.',
+    image: '/images/projects/vedaq-ai.jpg',
+    category: 'ai',
+    techStack: ['Next.js', 'OpenAI API', 'Firebase', 'TailwindCSS', 'Framer Motion'],
+    demoUrl: 'https://vedaq.theqbitlabs.com',
+    githubUrl: 'https://github.com/Mukesh1q2/vedaq-ai',
+    stats: { stars: 623, forks: 89, views: 8934 },
+    featured: true,
+    caseStudy: '/case-studies/vedaq-ai',
+  },
+  {
+    id: 'neurosymbiotic-codemind',
+    title: 'NeuroSymbiotic CodeMind — The Self-Evolving Lab',
+    description: 'Ever wanted to see AI agents mutate and learn in real-time? I built this interactive environment using D3.js to visualize agent lineages. It\'s a playground where agents interact, evolve, and talk back to you. It looks like a sci-fi movie, but it runs on solid React 19 architecture.',
+    image: '/images/projects/neurosymbiotic.jpg',
+    category: 'ai',
+    techStack: ['React 19', 'D3.js', 'TypeScript', 'Node.js', 'WebSocket'],
+    demoUrl: 'https://codemind.theqbitlabs.com',
+    githubUrl: 'https://github.com/Mukesh1q2/neurosymbiotic-codemind',
+    stats: { stars: 512, forks: 78, views: 6721 },
     featured: true,
   },
   {
-    id: 'blockchain-api',
-    title: 'Blockchain API Gateway',
-    description: 'Enterprise-grade blockchain API with smart contract integration, DeFi protocols, and multi-chain support.',
-    image: '/images/projects/blockchain-api.jpg',
-    category: 'api',
-    techStack: ['Node.js', 'Web3.js', 'Express', 'MongoDB', 'Ethereum'],
-    demoUrl: 'https://blockchain-api.dev',
-    githubUrl: 'https://github.com/theqbitlabs/blockchain-api',
-    stats: { stars: 456, forks: 78, views: 3421 },
-    featured: false,
+    id: 'quantum-playground',
+    title: 'The Quantum Playground',
+    description: 'A high-end, visual-heavy website designed to make quantum mechanics look as cool as it sounds. Matrix-style typography and 3D qubit simulations using Three.js. It\'s mostly eye candy, but the math under the hood is real—and it makes physics concepts actually understandable.',
+    image: '/images/projects/quantum-playground.jpg',
+    category: 'web',
+    techStack: ['React', 'Three.js', 'WebGL', 'Framer Motion', 'TypeScript'],
+    demoUrl: 'https://quantum.theqbitlabs.com',
+    githubUrl: 'https://github.com/Mukesh1q2/quantum-playground',
+    stats: { stars: 892, forks: 134, views: 11234 },
+    featured: true,
+    caseStudy: '/case-studies/quantum-playground',
   },
   {
-    id: 'ar-commerce',
-    title: 'AR Commerce Platform',
-    description: 'Augmented reality e-commerce platform with virtual try-on, 3D product visualization, and social shopping features.',
-    image: '/images/projects/ar-commerce.jpg',
-    category: 'mobile',
-    techStack: ['React Native', 'ARKit', 'Firebase', 'Stripe', 'WebRTC'],
-    demoUrl: 'https://ar-commerce.app',
-    githubUrl: 'https://github.com/theqbitlabs/ar-commerce',
-    stats: { stars: 321, forks: 45, views: 2156 },
-    featured: false,
+    id: 'ocr-system',
+    title: 'The "Everything-to-Data" OCR System',
+    description: 'Businesses love messy PDFs and handwritten notes; developers hate them. I built a pipeline that fixes that. Uses Vision Transformers to pull structured data out of chaotic medical records and invoices with scary-good accuracy. The kind of boring-but-vital infrastructure that keeps the lights on.',
+    image: '/images/projects/ocr-system.jpg',
+    category: 'ai',
+    techStack: ['Python', 'Vision Transformers', 'FastAPI', 'Docker', 'GCP'],
+    demoUrl: 'https://ocr.theqbitlabs.com',
+    githubUrl: 'https://github.com/Mukesh1q2/ocr-pipeline',
+    stats: { stars: 456, forks: 67, views: 5432 },
+    featured: true,
+  },
+  {
+    id: 'novagen-automation',
+    title: 'NovaGen Automation — Industrial Tech',
+    description: 'A premium industrial automation company website built for an ISO 9001:2015 certified solutions provider. Features an AI-powered chatbot using Gemini API, dual light/dark themes, glassmorphism UI with micro-animations, and interactive product catalog showcasing Siemens, Yaskawa, Mitsubishi & Delta products.',
+    image: '/images/projects/novagen-automation.jpg',
+    category: 'web',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Gemini API', 'Vercel'],
+    demoUrl: 'https://novagenautomation.com',
+    stats: { stars: 234, forks: 45, views: 3890 },
+    featured: true,
+  },
+  {
+    id: 'synthesis',
+    title: 'Synthesis — Cognitive Commons',
+    description: 'A revolutionary platform that transforms how groups make complex decisions by creating a "cognitive commons" where AI enhances human reasoning. Features real-time AI insights, evidence analysis, structured protocols, and collective wisdom generation for collaborative decision-making.',
+    image: '/images/projects/synthesis.jpg',
+    category: 'ai',
+    techStack: ['Next.js', 'TypeScript', 'OpenAI API', 'Real-time Collaboration', 'Firebase'],
+    demoUrl: 'https://synthesis.theqbitlabs.com',
+    stats: { stars: 312, forks: 58, views: 4210 },
+    featured: true,
+  },
+  {
+    id: 'lims',
+    title: 'LIMS — Library & Institute Management',
+    description: 'Comprehensive Library & Institute Management System with student tracking, attendance, fees, library, seating management, and analytics. Features real-time dashboard with attendance trends, fee collection tracking, book management, and locker assignments.',
+    image: '/images/projects/lims.jpg',
+    category: 'saas',
+    techStack: ['Next.js', 'TypeScript', 'Firebase', 'TailwindCSS', 'Chart.js'],
+    demoUrl: 'https://lims.theqbitlabs.com',
+    stats: { stars: 189, forks: 42, views: 3150 },
+    featured: true,
+  },
+  {
+    id: 'konnichiwa',
+    title: 'Konnichiwa Japan & Namaste India',
+    description: 'A dual-brand cultural festival website showcasing Konnichiwa Japan (Japanese culture in India) and Namaste India (Indian culture in Japan) festivals. Features event listings, ticket booking, gallery, magazine, and interactive cultural experiences.',
+    image: '/images/projects/konnichiwa.jpg',
+    category: 'web',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Vercel'],
+    demoUrl: 'https://konnichiwa.theqbitlabs.com',
+    stats: { stars: 156, forks: 34, views: 2890 },
+    featured: true,
   },
 ]
 
@@ -134,11 +179,11 @@ export function FeaturedWork() {
             theme.id === 'neumorphic' && 'text-gray-700',
             theme.id === 'vaporwave' && 'holographic font-display'
           )}>
-            Featured Work
+            🚀 Projects (The "Proof" Section)
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore my latest projects showcasing cutting-edge technology, innovative design, 
-            and scalable solutions that solve real-world problems.
+            Talk is cheap. Here's what I've actually built—from consciousness-inspired AI frameworks
+            to the boring-but-vital infrastructure that keeps businesses running.
           </p>
         </motion.div>
 
@@ -208,10 +253,15 @@ export function FeaturedWork() {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/images/placeholder-project.jpg'
+                      const img = e.target as HTMLImageElement
+                      // Prevent infinite loop - only set fallback once
+                      if (!img.dataset.fallback) {
+                        img.dataset.fallback = 'true'
+                        img.src = '/images/placeholder-project.svg'
+                      }
                     }}
                   />
-                  
+
                   {/* Overlay */}
                   <div className={cn(
                     'absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300',
@@ -221,7 +271,7 @@ export function FeaturedWork() {
                     theme.id === 'neumorphic' && 'from-purple-900/60',
                     theme.id === 'vaporwave' && 'from-vaporwave-pink/60'
                   )} />
-                  
+
                   {/* Action Buttons */}
                   <AnimatePresence>
                     {hoveredProject === project.id && (
@@ -250,7 +300,7 @@ export function FeaturedWork() {
                             <ExternalLink className="w-5 h-5" />
                           </motion.a>
                         )}
-                        
+
                         {project.githubUrl && (
                           <motion.a
                             href={project.githubUrl}
@@ -270,7 +320,7 @@ export function FeaturedWork() {
                             <Github className="w-5 h-5" />
                           </motion.a>
                         )}
-                        
+
                         {project.caseStudy && (
                           <motion.a
                             href={project.caseStudy}
@@ -306,7 +356,7 @@ export function FeaturedWork() {
                     )}>
                       {project.category.toUpperCase()}
                     </span>
-                    
+
                     {project.featured && (
                       <span className={cn(
                         'text-xs font-medium px-3 py-1 rounded-full',
@@ -320,15 +370,15 @@ export function FeaturedWork() {
                       </span>
                     )}
                   </div>
-                  
+
                   <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  
+
                   <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                     {project.description}
                   </p>
-                  
+
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.techStack.slice(0, 4).map((tech) => (
@@ -359,7 +409,7 @@ export function FeaturedWork() {
                       </span>
                     )}
                   </div>
-                  
+
                   {/* Stats */}
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">

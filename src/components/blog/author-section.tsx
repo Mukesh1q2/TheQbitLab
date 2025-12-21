@@ -3,101 +3,112 @@
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Twitter, Globe } from 'lucide-react'
 
-const authors = [
-  {
-    name: 'Alex Chen',
-    role: 'Founder & CEO',
-    bio: 'Full-stack developer with 10+ years experience. Passionate about React, Next.js, and building scalable applications.',
-    image: 'AC',
-    social: {
-      github: 'https://github.com/alexchen',
-      linkedin: 'https://linkedin.com/in/alexchen',
-      twitter: 'https://twitter.com/alexchen',
-      website: 'https://alexchen.dev'
-    }
-  },
-  {
-    name: 'Sarah Johnson',
-    role: 'Lead Developer',
-    bio: 'Frontend specialist focused on React ecosystem and modern web technologies.',
-    image: 'SJ',
-    social: {
-      github: 'https://github.com/sarahjohnson',
-      linkedin: 'https://linkedin.com/in/sarahjohnson'
-    }
+const author = {
+  name: 'Mukesh Kumar',
+  role: 'AI Engineer & Full-Stack Developer',
+  bio: 'Passionate about building intelligent systems that bridge ancient wisdom and modern technology. Specializing in AI, web development, and creating experiences that feel alive.',
+  initials: 'MK',
+  social: {
+    github: 'https://github.com/Mukesh1q2',
+    linkedin: 'https://linkedin.com/in/mukesh-kumar',
+    twitter: 'https://twitter.com/mukesh_kumar',
+    website: 'https://theqbitlabs.com'
   }
-]
+}
 
 export function AuthorSection() {
   return (
-    <section className="py-16 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 px-6 bg-background">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Meet Our Authors
+          <h2 className="text-3xl font-bold text-foreground mb-3">
+            About the Author
           </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            The talented developers and writers behind our technical content.
+          <p className="text-muted-foreground">
+            The developer behind the technical content.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {authors.map((author, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                  {author.image}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
-                    {author.name}
-                  </h3>
-                  <p className="text-purple-600 dark:text-purple-400 font-semibold mb-3">
-                    {author.role}
-                  </p>
-                  <p className="text-slate-600 dark:text-slate-300 mb-4">
-                    {author.bio}
-                  </p>
-                  <div className="flex space-x-3">
-                    {author.social.github && (
-                      <a href={author.social.github} className="text-slate-400 hover:text-gray-700">
-                        <Github className="w-5 h-5" />
-                      </a>
-                    )}
-                    {author.social.linkedin && (
-                      <a href={author.social.linkedin} className="text-slate-400 hover:text-blue-600">
-                        <Linkedin className="w-5 h-5" />
-                      </a>
-                    )}
-                    {author.social.twitter && (
-                      <a href={author.social.twitter} className="text-slate-400 hover:text-blue-400">
-                        <Twitter className="w-5 h-5" />
-                      </a>
-                    )}
-                    {author.social.website && (
-                      <a href={author.social.website} className="text-slate-400 hover:text-purple-600">
-                        <Globe className="w-5 h-5" />
-                      </a>
-                    )}
-                  </div>
-                </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10"
+        >
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary to-cyan-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-primary/25">
+              {author.initials}
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-foreground mb-1">
+                {author.name}
+              </h3>
+              <p className="text-primary font-medium mb-4">
+                {author.role}
+              </p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                {author.bio}
+              </p>
+              <div className="flex justify-center md:justify-start gap-3">
+                {author.social.github && (
+                  <motion.a
+                    href={author.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all"
+                  >
+                    <Github className="w-5 h-5" />
+                  </motion.a>
+                )}
+                {author.social.linkedin && (
+                  <motion.a
+                    href={author.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-blue-400 hover:border-blue-400/30 transition-all"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </motion.a>
+                )}
+                {author.social.twitter && (
+                  <motion.a
+                    href={author.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-cyan-400 hover:border-cyan-400/30 transition-all"
+                  >
+                    <Twitter className="w-5 h-5" />
+                  </motion.a>
+                )}
+                {author.social.website && (
+                  <motion.a
+                    href={author.social.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+                  >
+                    <Globe className="w-5 h-5" />
+                  </motion.a>
+                )}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

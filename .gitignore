@@ -51,3 +51,7 @@ user_input_files/
 # Prisma
 prisma/*.db
 prisma/*.db-journal
+
+.env.local
+.env
+node_modules/

@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import { TypewriterText } from './typewriter-text'
 import { useAppStore } from '@/store/app-store'
 import { AnimatedCounter } from '@/components/ui'
-import { ChevronDown, Github, Linkedin, Twitter, Mail, Download } from 'lucide-react'
+import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 // Dynamically import heavy components (reduces initial bundle significantly)
@@ -32,7 +32,7 @@ export function HeroSection() {
   const controls = useAnimation()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const { theme, customization } = useAppStore()
+  const { theme, customization, performanceMode } = useAppStore()
 
   useEffect(() => {
     if (isInView) {
@@ -40,7 +40,10 @@ export function HeroSection() {
     }
   }, [controls, isInView])
 
+  // Skip mouse tracking in performance mode to reduce JS overhead
   useEffect(() => {
+    if (performanceMode) return
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth) * 2 - 1,
@@ -50,33 +53,35 @@ export function HeroSection() {
 
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  }, [performanceMode])
 
-  // Delay 3D loading for better FCP
+  // Delay 3D loading for better FCP - skip entirely in performance mode
   useEffect(() => {
+    if (performanceMode) return
     if (customization.show3DBackground) {
       const timer = setTimeout(() => setIs3DReady(true), 1000)
       return () => clearTimeout(timer)
     }
-  }, [customization.show3DBackground])
+  }, [customization.show3DBackground, performanceMode])
 
+  // Reduce animation delays in performance mode for faster LCP
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: performanceMode ? 0.05 : 0.2,
+        delayChildren: performanceMode ? 0.1 : 0.3,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: performanceMode ? 10 : 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: performanceMode ? 0.3 : 0.6, ease: 'easeOut' },
     },
   }
 
@@ -113,7 +118,7 @@ export function HeroSection() {
             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
             className="text-lg font-mono text-muted-foreground"
           >
-            Hello, I'm{' '}
+            Hey there, I'm{' '}
             <span className={cn(
               'font-bold',
               theme.id === 'quantum' && 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600',
@@ -121,7 +126,7 @@ export function HeroSection() {
               theme.id === 'vaporwave' && 'holographic',
               theme.id === 'neumorphic' && 'text-primary'
             )}>
-              TheQbitlabs
+              Mukesh Kumar
             </span>
           </motion.div>
 
@@ -130,18 +135,18 @@ export function HeroSection() {
             <TypewriterText
               texts={[
                 'AI Engineer',
-                'LLM Architect',
                 'Full-Stack Developer',
-                'UX Designer',
+                'LLM Architect',
+                'System Designer',
                 'Problem Solver'
               ]}
               className={cn(
                 'text-4xl sm:text-6xl lg:text-7xl font-bold',
-                theme.id === 'quantum' && 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500',
+                theme.id === 'quantum' && 'bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text [-webkit-text-fill-color:transparent]',
                 theme.id === 'terminal' && 'text-terminal-green terminal-glow font-mono',
                 theme.id === 'minimalist' && 'text-minimalist-charcoal',
-                theme.id === 'neumorphic' && 'text-2xl',
-                theme.id === 'vaporwave' && 'holographic font-display'
+                theme.id === 'neumorphic' && 'text-primary',
+                theme.id === 'vaporwave' && 'bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text [-webkit-text-fill-color:transparent]'
               )}
             />
 
@@ -151,20 +156,18 @@ export function HeroSection() {
               transition={{ delay: 1 }}
               className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             >
-              Building the future with cutting-edge AI solutions and modern web applications.
-              Specializing in{' '}
+              I build{' '}
               <span className="font-semibold text-primary">
-                Large Language Models
+                AI that actually works
               </span>
-              ,{' '}
+              {' '}(and Full-Stack apps that don't break). Most people talk about AI like it's magic—I treat it like{' '}
               <span className="font-semibold text-primary">
-                React/Next.js
+                engineering
               </span>
-              , and{' '}
+              . I bridge the gap between "That's a cool research paper" and{' '}
               <span className="font-semibold text-primary">
-                scalable architectures
+                "Here's a product people can use."
               </span>
-              .
             </motion.p>
           </div>
 
@@ -261,10 +264,9 @@ export function HeroSection() {
             className="flex justify-center gap-6 pt-8"
           >
             {[
-              { icon: Github, href: 'https://github.com', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-              { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-              { icon: Mail, href: 'mailto:hello@qbitlab.com', label: 'Email' },
+              { icon: Github, href: 'https://github.com/Mukesh1q2', label: 'GitHub' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/mukeshkumarpandey/', label: 'LinkedIn' },
+              { icon: Mail, href: 'mailto:mukesh@theqbitlabs.com', label: 'Email' },
             ].map(({ icon: Icon, href, label }) => (
               <motion.a
                 key={label}

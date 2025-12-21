@@ -37,18 +37,18 @@ export function FeaturedProject() {
                       Completed
                     </span>
                   </div>
-                  
+
                   <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    AI-Powered Analytics Dashboard
+                    Brahm AI — The "Deep Philosophy" Experiment
                   </h3>
-                  
+
                   <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                    A comprehensive analytics platform that uses machine learning to provide 
-                    real-time insights and predictive analytics for business intelligence.
+                    An AI framework inspired by Vedic systems and vibrational computing. Moving beyond
+                    standard logic to simulate higher-order cognition—a mix of symbolic AI and neural hybrids.
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {['React', 'Python', 'TensorFlow', 'PostgreSQL', 'Docker'].map((tech) => (
+                    {['Python', 'PyTorch', 'React 19', 'TypeScript', 'Firebase'].map((tech) => (
                       <span
                         key={tech}
                         className="px-3 py-1 text-sm rounded-full bg-primary/10 text-primary border border-primary/20"
@@ -57,7 +57,7 @@ export function FeaturedProject() {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="grid grid-cols-3 gap-6 mb-8">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-primary mb-1">4.9</div>
@@ -81,7 +81,7 @@ export function FeaturedProject() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-4">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -101,7 +101,7 @@ export function FeaturedProject() {
                     </motion.button>
                   </div>
                 </div>
-                
+
                 <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
                   <div className="text-6xl opacity-60">📊</div>
                 </div>

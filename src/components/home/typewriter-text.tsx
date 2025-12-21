@@ -19,14 +19,28 @@ export function TypewriterText({
   loop = true,
   cursorChar = '|'
 }: TypewriterTextProps) {
+  // Start with first text fully typed to prevent hydration mismatch
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
-  const [currentCharIndex, setCurrentCharIndex] = useState(0)
+  const [currentCharIndex, setCurrentCharIndex] = useState(texts[0]?.length || 0)
   const [isDeleting, setIsDeleting] = useState(false)
   const [showCursor, setShowCursor] = useState(true)
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure we're on the client before animation
+  useEffect(() => {
+    setMounted(true)
+    // Start deleting after initial delay to begin the animation cycle
+    const initialDelay = setTimeout(() => {
+      setIsDeleting(true)
+    }, delay)
+    return () => clearTimeout(initialDelay)
+  }, [delay])
 
   useEffect(() => {
+    if (!mounted) return
+
     const currentText = texts[currentTextIndex]
-    
+
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         // Typing
@@ -52,7 +66,7 @@ export function TypewriterText({
     }, isDeleting ? 50 : 100) // Faster deleting than typing
 
     return () => clearTimeout(timeout)
-  }, [currentTextIndex, currentCharIndex, isDeleting, texts, delay, loop])
+  }, [currentTextIndex, currentCharIndex, isDeleting, texts, delay, loop, mounted])
 
   useEffect(() => {
     // Blinking cursor
@@ -63,34 +77,21 @@ export function TypewriterText({
     return () => clearInterval(cursorInterval)
   }, [])
 
-  const currentText = texts[currentTextIndex] || ''
+  const currentText = texts[currentTextIndex] || texts[0] || ''
   const displayedText = currentText.slice(0, currentCharIndex)
 
   return (
-    <div className={cn('inline-block', className)}>
-      <span className="relative">
-        {displayedText}
-        <motion.span
-          initial={{ opacity: 1 }}
-          animate={{ opacity: showCursor ? 1 : 0 }}
-          transition={{ duration: 0.1 }}
-          className="ml-1 inline-block"
-        >
-          {cursorChar}
-        </motion.span>
-      </span>
-      
-      {/* Glow effect for terminal theme */}
-      {className?.includes('terminal') && (
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          className="absolute inset-0 text-terminal-green terminal-glow pointer-events-none"
-          style={{ textShadow: '0 0 10px currentColor' }}
-        >
-          {displayedText}
-        </motion.span>
-      )}
-    </div>
+    <span className={cn('inline-block', className)}>
+      {displayedText}
+      <motion.span
+        initial={{ opacity: 1 }}
+        animate={{ opacity: showCursor ? 1 : 0 }}
+        transition={{ duration: 0.1 }}
+        className="ml-0.5 inline-block"
+        style={{ color: 'inherit' }}
+      >
+        {cursorChar}
+      </motion.span>
+    </span>
   )
 }

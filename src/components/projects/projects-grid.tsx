@@ -24,87 +24,157 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'ai-chatbot',
-    title: 'AI Customer Service Bot',
-    description: 'Intelligent chatbot with natural language processing, machine learning capabilities, and multi-platform integration.',
-    category: 'AI/ML',
-    tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB', 'WebSocket'],
+    id: 'optibid-energy',
+    title: 'OptiBid Energy — AI-Powered Trading Platform',
+    description: 'Revolutionary enterprise-grade platform for real-time energy analytics, intelligent bidding, and visual knowledge graphs. Features ML models (TFT, N-BEATS, DeepAR) for predictive analytics, Kafka + WebSocket streaming, and multi-tenant enterprise security.',
+    category: 'SaaS',
+    tech: ['Next.js 14', 'TypeScript', 'Kafka', 'WebSocket', 'Docker', 'Kubernetes', 'ML/AI'],
     status: 'Completed',
     rating: 4.9,
-    views: 1200,
-    date: '2024-11-15',
+    views: 8750,
+    date: '2024-12-18',
+    image: '/images/projects/optibid-energy.jpg',
     featured: true,
-    githubUrl: 'https://github.com/theqbitlabs/ai-chatbot',
-    demoUrl: 'https://chatbot-demo.theqbitlabs.com',
-    caseStudyUrl: '/case-studies/ai-chatbot'
+    demoUrl: 'https://optibid.theqbitlabs.com',
+    caseStudyUrl: '/case-studies/optibid-energy'
   },
   {
-    id: 'ecommerce-platform',
-    title: 'Modern E-commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration, inventory management, and analytics dashboard.',
-    category: 'Web Development',
-    tech: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
+    id: 'brahm-ai',
+    title: 'Brahm AI — The "Deep Philosophy" Experiment',
+    description: 'An AI framework inspired by Vedic systems and vibrational computing. Moving beyond standard logic to simulate higher-order cognition—a mix of symbolic AI and neural hybrids.',
+    category: 'AI/ML',
+    tech: ['Python', 'PyTorch', 'React 19', 'TypeScript', 'Firebase'],
+    status: 'Completed',
+    rating: 4.9,
+    views: 12450,
+    date: '2024-11-15',
+    image: '/images/projects/brahm-ai.jpg',
+    featured: true,
+    githubUrl: 'https://github.com/Mukesh1q2/brahm-ai',
+    demoUrl: 'https://brahm-ai.theqbitlabs.com',
+    caseStudyUrl: '/case-studies/brahm-ai'
+  },
+  {
+    id: 'vedaq-ai',
+    title: 'VedaQ AI — Spiritual Tech',
+    description: 'A full-stack app bringing ancient wisdom into the 21st century with karma-scoring algorithms, mantra playback, and an LLM that speaks English, Hindi, and Hinglish.',
+    category: 'AI/ML',
+    tech: ['Next.js', 'OpenAI API', 'Firebase', 'TailwindCSS', 'Framer Motion'],
     status: 'Completed',
     rating: 4.8,
-    views: 980,
+    views: 8934,
     date: '2024-10-22',
+    image: '/images/projects/vedaq-ai.jpg',
     featured: true,
-    githubUrl: 'https://github.com/theqbitlabs/ecommerce-platform',
-    demoUrl: 'https://shop-demo.theqbitlabs.com'
+    githubUrl: 'https://github.com/Mukesh1q2/vedaq-ai',
+    demoUrl: 'https://vedaq.theqbitlabs.com',
+    caseStudyUrl: '/case-studies/vedaq-ai'
   },
   {
-    id: 'analytics-dashboard',
-    title: 'Real-time Analytics Dashboard',
-    description: 'Interactive dashboard for data visualization and business intelligence with real-time updates.',
-    category: 'Data Visualization',
-    tech: ['React', 'D3.js', 'WebSocket', 'Redis', 'Express'],
-    status: 'In Progress',
-    rating: 4.7,
-    views: 750,
+    id: 'synthesis',
+    title: 'Synthesis — Cognitive Commons',
+    description: 'A revolutionary platform for collaborative decision-making with AI-enhanced reasoning. Features real-time AI insights, evidence analysis, and collective wisdom generation.',
+    category: 'AI/ML',
+    tech: ['Next.js', 'TypeScript', 'OpenAI API', 'Real-time Collaboration', 'Firebase'],
+    status: 'Completed',
+    rating: 4.9,
+    views: 4210,
     date: '2024-12-01',
+    image: '/images/projects/synthesis.jpg',
     featured: true,
-    demoUrl: 'https://analytics-demo.theqbitlabs.com'
+    demoUrl: 'https://synthesis.theqbitlabs.com'
   },
   {
-    id: 'mobile-fitness-app',
-    title: 'Fitness Tracking Mobile App',
-    description: 'Cross-platform mobile app for fitness tracking with workout plans and progress monitoring.',
-    category: 'Mobile Apps',
-    tech: ['React Native', 'Firebase', 'Redux', 'Chart.js'],
+    id: 'neurosymbiotic-codemind',
+    title: 'NeuroSymbiotic CodeMind — Self-Evolving Lab',
+    description: 'Interactive environment using D3.js to visualize agent lineages where AI agents mutate and learn in real-time. A playground where agents interact, evolve, and communicate.',
+    category: 'AI/ML',
+    tech: ['React 19', 'D3.js', 'TypeScript', 'Node.js', 'WebSocket'],
+    status: 'Completed',
+    rating: 4.7,
+    views: 6721,
+    date: '2024-09-18',
+    image: '/images/projects/neurosymbiotic.jpg',
+    featured: true,
+    githubUrl: 'https://github.com/Mukesh1q2/neurosymbiotic-codemind',
+    demoUrl: 'https://codemind.theqbitlabs.com'
+  },
+  {
+    id: 'quantum-playground',
+    title: 'The Quantum Playground',
+    description: 'A visual-heavy website making quantum mechanics look as cool as it sounds. Matrix-style typography and 3D qubit simulations using Three.js with real math under the hood.',
+    category: 'Web Development',
+    tech: ['React', 'Three.js', 'WebGL', 'Framer Motion', 'TypeScript'],
+    status: 'Completed',
+    rating: 4.8,
+    views: 11234,
+    date: '2024-08-30',
+    image: '/images/projects/quantum-playground.jpg',
+    featured: true,
+    githubUrl: 'https://github.com/Mukesh1q2/quantum-playground',
+    demoUrl: 'https://quantum.theqbitlabs.com',
+    caseStudyUrl: '/case-studies/quantum-playground'
+  },
+  {
+    id: 'ocr-system',
+    title: 'The "Everything-to-Data" OCR System',
+    description: 'A pipeline using Vision Transformers to extract structured data from chaotic medical records and invoices with high accuracy. Boring-but-vital infrastructure work.',
+    category: 'AI/ML',
+    tech: ['Python', 'Vision Transformers', 'FastAPI', 'Docker', 'GCP'],
+    status: 'Completed',
+    rating: 4.7,
+    views: 5432,
+    date: '2024-07-15',
+    image: '/images/projects/ocr-system.jpg',
+    featured: true,
+    githubUrl: 'https://github.com/Mukesh1q2/ocr-pipeline',
+    demoUrl: 'https://ocr.theqbitlabs.com'
+  },
+  {
+    id: 'novagen-automation',
+    title: 'NovaGen Automation — Industrial Tech',
+    description: 'Premium industrial automation website with AI-powered chatbot using Gemini API, dual themes, glassmorphism UI, and interactive product catalog for Siemens, Yaskawa & more.',
+    category: 'Web Development',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Gemini API', 'Vercel'],
+    status: 'Completed',
+    rating: 4.8,
+    views: 3890,
+    date: '2024-12-10',
+    image: '/images/projects/novagen-automation.jpg',
+    featured: true,
+    demoUrl: 'https://novagenautomation.com'
+  },
+  {
+    id: 'lims',
+    title: 'LIMS — Library & Institute Management',
+    description: 'Comprehensive management system with student tracking, attendance, fees, library, seating, and analytics. Real-time dashboard with attendance trends and fee collection tracking.',
+    category: 'SaaS',
+    tech: ['Next.js', 'TypeScript', 'Firebase', 'TailwindCSS', 'Chart.js'],
     status: 'Completed',
     rating: 4.6,
-    views: 650,
-    date: '2024-09-18',
-    featured: false
+    views: 3150,
+    date: '2024-11-20',
+    image: '/images/projects/lims.jpg',
+    featured: true,
+    demoUrl: 'https://lims.theqbitlabs.com'
   },
   {
-    id: 'blockchain-wallet',
-    title: 'Decentralized Crypto Wallet',
-    description: 'Secure cryptocurrency wallet with DeFi integration and multi-chain support.',
-    category: 'Blockchain',
-    tech: ['React', 'Web3.js', 'Solidity', 'MetaMask'],
-    status: 'Planning',
-    rating: 4.5,
-    views: 420,
-    date: '2024-12-10',
-    featured: false
-  },
-  {
-    id: 'task-management',
-    title: 'Collaborative Task Manager',
-    description: 'Team collaboration tool with real-time updates, file sharing, and project tracking.',
+    id: 'konnichiwa',
+    title: 'Konnichiwa Japan & Namaste India',
+    description: 'A dual-brand cultural festival website showcasing Konnichiwa Japan and Namaste India festivals with event listings, ticket booking, gallery, and interactive experiences.',
     category: 'Web Development',
-    tech: ['Vue.js', 'Laravel', 'MySQL', 'Socket.io'],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Vercel'],
     status: 'Completed',
-    rating: 4.4,
-    views: 580,
-    date: '2024-08-30',
-    featured: false,
-    githubUrl: 'https://github.com/theqbitlabs/task-manager'
+    rating: 4.7,
+    views: 2890,
+    date: '2024-12-15',
+    image: '/images/projects/konnichiwa.jpg',
+    featured: true,
+    demoUrl: 'https://konnichiwa.theqbitlabs.com'
   }
 ]
 
-const categories = ['All', 'AI/ML', 'Web Development', 'Mobile Apps', 'Data Visualization', 'Blockchain']
+const categories = ['All', 'AI/ML', 'Web Development', 'SaaS', 'Data Visualization', 'Mobile Apps']
 const statuses = ['All', 'Completed', 'In Progress', 'Planning']
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },
@@ -128,11 +198,11 @@ export function ProjectsGrid({ selectedCategory = 'All', searchQuery = '' }: Pro
   const filteredProjects = projects.filter(project => {
     const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory
     const matchesStatus = selectedStatus === 'All' || project.status === selectedStatus
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.tech.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()))
-    
+
     return matchesCategory && matchesStatus && matchesSearch
   })
 
@@ -246,7 +316,7 @@ export function ProjectsGrid({ selectedCategory = 'All', searchQuery = '' }: Pro
 
         {/* Projects Grid/List */}
         <div className={cn(
-          viewMode === 'grid' 
+          viewMode === 'grid'
             ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
             : 'space-y-6'
         )}>

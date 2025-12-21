@@ -184,10 +184,10 @@ export async function POST(request: NextRequest) {
                         format: format,
                         datasetType: datasetType,
                         size: buffer.length,
-                        stats: analysis?.stats || {},
+                        stats: analysis?.stats ? JSON.parse(JSON.stringify(analysis.stats)) : {},
                         config: config,
                         uploadedAt: new Date().toISOString(),
-                    }
+                    } as any
                 },
             },
         })

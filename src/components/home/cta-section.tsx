@@ -5,20 +5,15 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useAppStore } from '@/store/app-store'
 import { cn } from '@/lib/utils'
-import { 
+import {
   ArrowRight,
   Mail,
-  MessageCircle,
   Calendar,
-  Download,
   Github,
   Linkedin,
-  Twitter,
   Sparkles,
-  Zap,
-  Code,
-  Brain,
-  Rocket
+  Rocket,
+  Brain
 } from 'lucide-react'
 
 export function CTASection() {
@@ -67,25 +62,19 @@ export function CTASection() {
     {
       name: 'GitHub',
       icon: Github,
-      href: 'https://github.com/theqbitlabs',
+      href: 'https://github.com/Mukesh1q2',
       color: 'hover:text-gray-900'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: 'https://linkedin.com/in/theqbitlabs',
+      href: 'https://www.linkedin.com/in/mukeshkumarpandey/',
       color: 'hover:text-blue-600'
-    },
-    {
-      name: 'Twitter',
-      icon: Twitter,
-      href: 'https://twitter.com/theqbitlabs',
-      color: 'hover:text-blue-400'
     },
     {
       name: 'Email',
       icon: Mail,
-      href: 'mailto:hello@theqbitlabs.com',
+      href: 'mailto:mukesh@theqbitlabs.com',
       color: 'hover:text-red-500'
     }
   ]
@@ -134,7 +123,7 @@ export function CTASection() {
             )}
           >
             <Sparkles className="w-4 h-4" />
-            Ready to build the future together?
+            Want to build something extraordinary?
           </motion.div>
 
           <motion.h2
@@ -150,7 +139,7 @@ export function CTASection() {
               theme.id === 'vaporwave' && 'holographic font-display'
             )}
           >
-            Let's Create Something
+            📞 Let's Chat
             <br />
             <span className={cn(
               'bg-gradient-to-r bg-clip-text text-transparent',
@@ -160,7 +149,7 @@ export function CTASection() {
               theme.id === 'neumorphic' && 'from-purple-600 to-pink-600',
               theme.id === 'vaporwave' && 'from-vaporwave-pink to-vaporwave-purple'
             )}>
-              Extraordinary
+              I'm Your Guy
             </span>
           </motion.h2>
 
@@ -170,9 +159,9 @@ export function CTASection() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
-            Whether you need cutting-edge AI solutions, scalable web applications, 
-            or innovative digital experiences, I'm here to turn your vision into reality. 
-            Let's build the future, one line of code at a time.
+            If you want to build something extraordinary (or just want to talk about
+            the future of AI agents), reach out. I work with teams and individuals
+            worldwide from India—turning "what if" ideas into real products.
           </motion.p>
         </motion.div>
 
@@ -238,7 +227,7 @@ export function CTASection() {
                   <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {button.title}
                   </h3>
-                  
+
                   <p className="text-muted-foreground text-sm mb-4">
                     {button.description}
                   </p>
@@ -361,7 +350,7 @@ export function CTASection() {
           <p className="text-muted-foreground mb-6">
             Let's connect and build something amazing together
           </p>
-          
+
           <div className="flex justify-center gap-6">
             {socialLinks.map((social, index) => {
               const Icon = social.icon
@@ -398,7 +387,7 @@ export function CTASection() {
             transition={{ delay: 1.5, duration: 0.6 }}
             className="mt-8 text-sm text-muted-foreground"
           >
-            <p>Available for freelance projects and consultations</p>
+            <p>📍 Based in India • Working with the world remotely</p>
             <p className="mt-1">
               <span className={cn(
                 'font-medium',
@@ -408,7 +397,7 @@ export function CTASection() {
                 theme.id === 'neumorphic' && 'text-gray-600',
                 theme.id === 'vaporwave' && 'text-vaporwave-cyan'
               )}>
-                Response time: Within 24 hours
+                Available for AI projects, consultations & full-stack builds
               </span>
             </p>
           </motion.div>
@@ -417,11 +406,11 @@ export function CTASection() {
 
       {/* Floating Elements */}
       <motion.div
-        animate={{ 
+        animate={{
           y: [0, -20, 0],
           rotate: [0, 5, 0]
         }}
-        transition={{ 
+        transition={{
           duration: 4,
           repeat: Infinity,
           ease: "easeInOut"
@@ -435,13 +424,13 @@ export function CTASection() {
           theme.id === 'vaporwave' && 'bg-gradient-to-r from-vaporwave-pink to-vaporwave-cyan'
         )}
       />
-      
+
       <motion.div
-        animate={{ 
+        animate={{
           y: [0, 20, 0],
           rotate: [0, -5, 0]
         }}
-        transition={{ 
+        transition={{
           duration: 6,
           repeat: Infinity,
           ease: "easeInOut",

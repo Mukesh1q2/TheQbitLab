@@ -8,6 +8,7 @@ import { MainNav } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { SettingsPanel } from '@/components/settings'
 import { ThemeEffects } from '@/components/effects'
+import { QbotAssistant } from '@/components/chat'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -117,6 +118,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <SettingsPanel />
+          <QbotAssistant />
           <Toaster
             position="bottom-right"
             toastOptions={{

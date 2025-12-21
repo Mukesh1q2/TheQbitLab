@@ -26,7 +26,7 @@ export function MarketplaceHero() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative py-20 pt-32 overflow-hidden">
       {/* Background with animated elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         {/* Floating geometric shapes */}
@@ -111,7 +111,7 @@ export function MarketplaceHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
           >
-            Discover, download, and deploy premium AI templates, web components, and 
+            Discover, download, and deploy premium AI templates, web components, and
             development assets to accelerate your next project.
           </motion.p>
         </motion.div>

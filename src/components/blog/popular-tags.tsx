@@ -1,28 +1,36 @@
 'use client'
 
+import { motion } from 'framer-motion'
+
 export function PopularTags() {
   const tags = [
-    'React', 'Next.js', 'TypeScript', 'JavaScript', 'CSS', 'Node.js', 
+    'React', 'Next.js', 'TypeScript', 'JavaScript', 'CSS', 'Node.js',
     'AI/ML', 'Web Development', 'Tutorial', 'Best Practices', 'Performance', 'Accessibility'
   ]
-  
+
   return (
-    <div className="py-8 px-6 bg-slate-50 dark:bg-slate-800">
+    <section className="py-12 px-6 bg-background">
       <div className="max-w-4xl mx-auto">
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+        <h3 className="text-xl font-bold text-foreground mb-6 text-center">
           Popular Tags
         </h3>
         <div className="flex flex-wrap gap-2 justify-center">
-          {tags.map((tag) => (
-            <span
+          {tags.map((tag, index) => (
+            <motion.button
               key={tag}
-              className="px-3 py-1 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm hover:bg-purple-100 dark:hover:bg-purple-800 cursor-pointer transition-colors"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 text-muted-foreground rounded-lg text-sm hover:border-primary/30 hover:text-primary cursor-pointer transition-all"
             >
               #{tag}
-            </span>
+            </motion.button>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

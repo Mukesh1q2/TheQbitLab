@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#9333ea;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="300" y="175" width="200" height="100" rx="10" fill="url(#accent)" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M360 225 L400 195 L440 225 L420 225 L420 255 L380 255 L380 225 Z" fill="#00d4ff" fill-opacity="0.5"/>
+  <text x="400" y="295" font-family="system-ui, sans-serif" font-size="14" fill="#666" text-anchor="middle">Project Image</text>
+</svg>

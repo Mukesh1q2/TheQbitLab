@@ -6,24 +6,24 @@ import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar } from 'lucide-reac
 const contactMethods = [
   {
     icon: Mail,
-    title: 'Email Us',
-    description: 'Send us an email and we\'ll respond within 24 hours.',
-    contact: 'hello@theqbitlabs.com',
+    title: 'Email Me',
+    description: 'Send me an email and I\'ll respond within 24 hours.',
+    contact: 'mukesh@theqbitlabs.com',
     action: 'Send Email'
   },
   {
     icon: Phone,
-    title: 'Call Us',
-    description: 'Speak directly with our team during business hours.',
-    contact: '+1 (555) 123-4567',
+    title: 'Call Me',
+    description: 'Speak directly with me during business hours.',
+    contact: '+91-9716966182',
     action: 'Call Now'
   },
   {
     icon: MessageCircle,
-    title: 'Live Chat',
-    description: 'Chat with us in real-time for immediate assistance.',
-    contact: 'Available 9 AM - 6 PM PST',
-    action: 'Start Chat'
+    title: 'WhatsApp',
+    description: 'Message me on WhatsApp for quick responses.',
+    contact: '+91-9716966182',
+    action: 'Chat on WhatsApp'
   },
   {
     icon: Calendar,
@@ -66,26 +66,26 @@ export function ContactInfo() {
               <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <method.icon className="w-8 h-8 text-white" />
               </div>
-              
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                 {method.title}
               </h3>
-              
+
               <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">
                 {method.description}
               </p>
-              
+
               <p className="text-purple-600 dark:text-purple-400 font-semibold mb-4">
                 {method.contact}
               </p>
-              
+
               <button className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-medium text-sm">
                 {method.action}
               </button>
             </motion.div>
           ))}
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,31 +96,32 @@ export function ContactInfo() {
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
               <MapPin className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-              <h4 className="font-bold text-slate-900 dark:text-white mb-2">Our Office</h4>
+              <h4 className="font-bold text-slate-900 dark:text-white mb-2">Location</h4>
               <p className="text-slate-600 dark:text-slate-300">
-                123 Tech Street<br />
-                San Francisco, CA 94105<br />
-                United States
+                New Delhi, India<br />
+                Available for remote work worldwide
               </p>
             </div>
-            
+
             <div>
               <Clock className="w-8 h-8 text-purple-600 mx-auto mb-3" />
               <h4 className="font-bold text-slate-900 dark:text-white mb-2">Business Hours</h4>
               <p className="text-slate-600 dark:text-slate-300">
-                Monday - Friday: 9:00 AM - 6:00 PM PST<br />
-                Saturday: 10:00 AM - 4:00 PM PST<br />
-                Sunday: Closed
+                Monday - Friday: 10:00 AM - 7:00 PM IST<br />
+                Saturday: 11:00 AM - 4:00 PM IST<br />
+                Sunday: By Appointment
               </p>
             </div>
-            
+
             <div>
               <Phone className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-              <h4 className="font-bold text-slate-900 dark:text-white mb-2">Emergency Contact</h4>
+              <h4 className="font-bold text-slate-900 dark:text-white mb-2">Direct Contact</h4>
               <p className="text-slate-600 dark:text-slate-300">
-                For urgent matters outside business hours:<br />
                 <span className="text-purple-600 dark:text-purple-400 font-semibold">
-                  +1 (555) 999-8888
+                  +91-9716966182
+                </span><br />
+                <span className="text-purple-600 dark:text-purple-400 font-semibold">
+                  mukesh@theqbitlabs.com
                 </span>
               </p>
             </div>

@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Settings, Palette, Zap, Volume2, VolumeX, Check, X,
-    Eye, EyeOff, Layers, Droplet, RotateCcw, Sliders
+    Eye, EyeOff, Layers, Droplet, RotateCcw, Sliders,
+    Gauge, Bolt, Monitor
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAppStore, THEMES, Theme, ThemeCustomization } from '@/store/app-store'
@@ -25,7 +26,28 @@ export function SettingsPanel() {
         toggleSound,
         particleEffects,
         toggleParticleEffects,
+        // P1 Features
+        effectIntensity,
+        setEffectIntensity,
+        performanceMode,
+        togglePerformanceMode,
+        previewTheme,
+        setPreviewTheme,
     } = useAppStore()
+
+    // P1: Handle theme hover for live preview
+    const handleThemeHover = useCallback((t: Theme | null) => {
+        if (t && t.id !== theme.id) {
+            setPreviewTheme(t)
+        } else if (!t) {
+            setPreviewTheme(null)
+        }
+    }, [theme.id, setPreviewTheme])
+
+    // P1: Handle theme selection (commits the preview)
+    const handleThemeSelect = useCallback((t: Theme) => {
+        setTheme(t)
+    }, [setTheme])
 
     return (
         <>
@@ -54,7 +76,10 @@ export function SettingsPanel() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => {
+                                setPreviewTheme(null) // Reset preview on close
+                                setIsOpen(false)
+                            }}
                             className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
                         />
 
@@ -76,10 +101,54 @@ export function SettingsPanel() {
                             <div className="flex items-center justify-between p-4 border-b border-border">
                                 <h2 className="text-lg font-semibold text-foreground">Theme Settings</h2>
                                 <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="p-2 rounded-md hover:bg-secondary transition-colors"
+                                    onClick={() => {
+                                        setPreviewTheme(null) // Reset preview on close
+                                        setIsOpen(false)
+                                    }}
+                                    className="p-2 rounded-md hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    aria-label="Close settings panel"
                                 >
                                     <X className="w-5 h-5 text-muted-foreground" />
+                                </button>
+                            </div>
+
+                            {/* P1: Performance Mode Quick Toggle */}
+                            <div className="px-4 py-3 border-b border-border bg-secondary/30">
+                                <button
+                                    onClick={togglePerformanceMode}
+                                    className={cn(
+                                        'w-full flex items-center justify-between p-3 rounded-lg transition-all',
+                                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                                        performanceMode
+                                            ? 'bg-accent/20 border-2 border-accent'
+                                            : 'bg-secondary/50 border border-border hover:border-accent/50'
+                                    )}
+                                    role="switch"
+                                    aria-checked={performanceMode}
+                                    aria-label={`Performance Mode: ${performanceMode ? 'enabled, all effects disabled' : 'disabled, click to disable all heavy effects'}`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className={cn(
+                                            'w-10 h-10 rounded-full flex items-center justify-center',
+                                            performanceMode ? 'bg-accent text-accent-foreground' : 'bg-muted text-muted-foreground'
+                                        )}>
+                                            <Bolt className="w-5 h-5" />
+                                        </div>
+                                        <div className="text-left">
+                                            <div className="font-medium text-foreground">Performance Mode</div>
+                                            <div className="text-xs text-muted-foreground">
+                                                {performanceMode ? 'All effects disabled' : 'Disable all heavy effects instantly'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={cn(
+                                        'px-3 py-1 rounded-full text-xs font-medium',
+                                        performanceMode
+                                            ? 'bg-accent text-accent-foreground'
+                                            : 'bg-muted text-muted-foreground'
+                                    )}>
+                                        {performanceMode ? 'ON' : 'OFF'}
+                                    </div>
                                 </button>
                             </div>
 
@@ -91,10 +160,14 @@ export function SettingsPanel() {
                                         onClick={() => setActiveTab(tab)}
                                         className={cn(
                                             'flex-1 py-3 text-sm font-medium transition-colors',
+                                            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
                                             activeTab === tab
                                                 ? 'text-primary border-b-2 border-primary'
                                                 : 'text-muted-foreground hover:text-foreground'
                                         )}
+                                        role="tab"
+                                        aria-selected={activeTab === tab}
+                                        aria-controls={`tabpanel-${tab}`}
                                     >
                                         {tab === 'themes' && 'Themes'}
                                         {tab === 'display' && 'Display'}
@@ -108,18 +181,34 @@ export function SettingsPanel() {
                                 {/* Themes Tab */}
                                 {activeTab === 'themes' && (
                                     <div className="space-y-6">
+                                        {/* Live Preview indicator */}
+                                        {previewTheme && (
+                                            <div className="p-3 rounded-lg bg-accent/10 border border-accent/30 flex items-center gap-2">
+                                                <Monitor className="w-4 h-4 text-accent" />
+                                                <span className="text-sm text-accent">
+                                                    Previewing: <strong>{previewTheme.name}</strong>
+                                                </span>
+                                            </div>
+                                        )}
+
                                         <section>
                                             <div className="flex items-center gap-2 mb-4">
                                                 <Palette className="w-5 h-5 text-primary" />
                                                 <h3 className="font-medium text-foreground">Select Theme</h3>
+                                                <span className="text-xs text-muted-foreground ml-auto">Hover to preview</span>
                                             </div>
-                                            <div className="grid grid-cols-2 gap-3">
+                                            <div
+                                                className="grid grid-cols-2 gap-3"
+                                                onMouseLeave={() => handleThemeHover(null)}
+                                            >
                                                 {THEMES.map((t) => (
                                                     <ThemePreviewCard
                                                         key={t.id}
                                                         theme={t}
                                                         isSelected={theme.id === t.id}
-                                                        onClick={() => setTheme(t)}
+                                                        isPreviewing={previewTheme?.id === t.id}
+                                                        onClick={() => handleThemeSelect(t)}
+                                                        onHover={() => handleThemeHover(t)}
                                                     />
                                                 ))}
                                             </div>
@@ -275,6 +364,65 @@ export function SettingsPanel() {
                                 {/* Effects Tab */}
                                 {activeTab === 'effects' && (
                                     <div className="space-y-6">
+                                        {/* P1: Effect Intensity Master Slider */}
+                                        <section className="space-y-4">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <Gauge className="w-5 h-5 text-primary" />
+                                                <h3 className="font-medium text-foreground">Effect Intensity</h3>
+                                                <span className="ml-auto text-sm font-mono text-muted-foreground">
+                                                    {effectIntensity}%
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-muted-foreground mb-3">
+                                                Master control for all visual effects. Lower values = better performance.
+                                            </p>
+
+                                            {/* P1: Effect Intensity slider with full accessibility */}
+                                            <div className="space-y-2">
+                                                <input
+                                                    id="effect-intensity-slider"
+                                                    type="range"
+                                                    min="0"
+                                                    max="100"
+                                                    value={effectIntensity}
+                                                    onChange={(e) => setEffectIntensity(Number(e.target.value))}
+                                                    className="w-full h-2 rounded-full appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                                    style={{
+                                                        background: `linear-gradient(to right, 
+                                                            hsl(var(--muted)) 0%, 
+                                                            hsl(var(--primary)) ${effectIntensity}%, 
+                                                            hsl(var(--muted)) ${effectIntensity}%)`
+                                                    }}
+                                                    aria-label="Effect Intensity"
+                                                    aria-valuemin={0}
+                                                    aria-valuemax={100}
+                                                    aria-valuenow={effectIntensity}
+                                                    aria-valuetext={`${effectIntensity}% - ${effectIntensity < 30 ? 'Performance optimized' : effectIntensity < 70 ? 'Balanced' : 'Maximum visuals'}`}
+                                                />
+                                                <div className="flex justify-between text-xs text-muted-foreground">
+                                                    <span>Off</span>
+                                                    <span>Low</span>
+                                                    <span>Medium</span>
+                                                    <span>High</span>
+                                                    <span>Max</span>
+                                                </div>
+                                            </div>
+
+                                            {/* Intensity recommendations */}
+                                            <div className={cn(
+                                                'p-3 rounded-lg text-sm',
+                                                effectIntensity < 30
+                                                    ? 'bg-green-500/10 text-green-600 dark:text-green-400'
+                                                    : effectIntensity < 70
+                                                        ? 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400'
+                                                        : 'bg-orange-500/10 text-orange-600 dark:text-orange-400'
+                                            )}>
+                                                {effectIntensity < 30 && '⚡ Performance optimized - minimal visual effects'}
+                                                {effectIntensity >= 30 && effectIntensity < 70 && '✨ Balanced - good visual experience with decent performance'}
+                                                {effectIntensity >= 70 && '🎨 Maximum visuals - best experience on powerful devices'}
+                                            </div>
+                                        </section>
+
                                         <section className="space-y-3">
                                             <h3 className="font-medium text-foreground mb-3">Animation Effects</h3>
 
@@ -282,7 +430,7 @@ export function SettingsPanel() {
                                                 icon={<span className="text-lg">✨</span>}
                                                 label="Particle Effects"
                                                 description="Theme-specific animations"
-                                                enabled={particleEffects}
+                                                enabled={particleEffects && !performanceMode}
                                                 onToggle={toggleParticleEffects}
                                             />
 
@@ -302,9 +450,9 @@ export function SettingsPanel() {
                                             </h4>
                                             <p className="text-sm text-muted-foreground">
                                                 {theme.id === 'quantum' && 'Interactive neural network with cursor-responsive nodes and glowing connections.'}
-                                                {theme.id === 'terminal' && 'Matrix digital rain with CRT scan lines and screen flicker.'}
-                                                {theme.id === 'neumorphic' && 'Floating frosted glass orbs with depth and blur effects.'}
-                                                {theme.id === 'vaporwave' && 'Retro sunset, neon grid, and glitch animation effects.'}
+                                                {theme.id === 'terminal' && 'Subtle matrix rain with refined CRT ambient effects.'}
+                                                {theme.id === 'neumorphic' && 'Subtle frosted glass orbs with refined depth effects.'}
+                                                {theme.id === 'vaporwave' && 'Retro sunset with refined neon grid and ambient effects.'}
                                                 {theme.id === 'minimalist' && 'Clean, minimal animations with subtle micro-interactions.'}
                                             </p>
                                         </section>
@@ -328,21 +476,28 @@ export function SettingsPanel() {
 function ThemePreviewCard({
     theme,
     isSelected,
+    isPreviewing,
     onClick,
+    onHover,
 }: {
     theme: Theme
     isSelected: boolean
+    isPreviewing?: boolean
     onClick: () => void
+    onHover?: () => void
 }) {
     return (
         <button
             onClick={onClick}
+            onMouseEnter={onHover}
             className={cn(
                 'relative p-3 rounded-xl border-2 transition-all text-left',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                 isSelected
                     ? 'border-primary shadow-lg'
-                    : 'border-border hover:border-primary/50'
+                    : isPreviewing
+                        ? 'border-accent/70 shadow-md bg-accent/5'
+                        : 'border-border hover:border-primary/50'
             )}
         >
             {/* Color preview */}
@@ -380,11 +535,17 @@ function ThemePreviewCard({
                     <Check className="w-3 h-3 text-primary-foreground" />
                 </div>
             )}
+
+            {/* Preview indicator */}
+            {isPreviewing && !isSelected && (
+                <div className="absolute top-2 right-2 px-2 py-0.5 bg-accent/80 text-accent-foreground rounded text-[10px] font-medium">
+                    Preview
+                </div>
+            )}
         </button>
     )
 }
 
-// Toggle Item
 function ToggleItem({
     icon,
     label,
@@ -398,6 +559,8 @@ function ToggleItem({
     enabled: boolean
     onToggle: () => void
 }) {
+    const toggleId = `toggle-${label.toLowerCase().replace(/\s+/g, '-')}`
+
     return (
         <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
             <div className="flex items-center gap-3">
@@ -408,16 +571,20 @@ function ToggleItem({
                     {icon}
                 </div>
                 <div>
-                    <div className="font-medium text-foreground text-sm">{label}</div>
-                    <div className="text-xs text-muted-foreground">{description}</div>
+                    <label htmlFor={toggleId} className="font-medium text-foreground text-sm cursor-pointer">{label}</label>
+                    <div className="text-xs text-muted-foreground" id={`${toggleId}-description`}>{description}</div>
                 </div>
             </div>
-            <ToggleSwitch enabled={enabled} onToggle={onToggle} />
+            <ToggleSwitch
+                enabled={enabled}
+                onToggle={onToggle}
+                id={toggleId}
+                aria-describedby={`${toggleId}-description`}
+            />
         </div>
     )
 }
 
-// Slider Item
 function SliderItem({
     label,
     value,
@@ -431,13 +598,17 @@ function SliderItem({
     max: number
     onChange: (value: number) => void
 }) {
+    // Generate a stable ID from the label
+    const sliderId = `slider-${label.toLowerCase().replace(/\s+/g, '-')}`
+
     return (
         <div className="space-y-2">
             <div className="flex items-center justify-between">
-                <span className="text-sm text-foreground">{label}</span>
-                <span className="text-xs text-muted-foreground">{value}%</span>
+                <label htmlFor={sliderId} className="text-sm text-foreground">{label}</label>
+                <span className="text-xs text-muted-foreground" aria-live="polite">{value}%</span>
             </div>
             <input
+                id={sliderId}
                 type="range"
                 min={min}
                 max={max}
@@ -446,6 +617,7 @@ function SliderItem({
                 className={cn(
                     'w-full h-2 rounded-full appearance-none cursor-pointer',
                     'bg-secondary',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                     '[&::-webkit-slider-thumb]:appearance-none',
                     '[&::-webkit-slider-thumb]:w-4',
                     '[&::-webkit-slider-thumb]:h-4',
@@ -455,29 +627,38 @@ function SliderItem({
                     '[&::-webkit-slider-thumb]:transition-transform',
                     '[&::-webkit-slider-thumb]:hover:scale-110'
                 )}
+                aria-label={label}
+                aria-valuemin={min}
+                aria-valuemax={max}
+                aria-valuenow={value}
             />
         </div>
     )
 }
 
-// Toggle Switch
 function ToggleSwitch({
     enabled,
     onToggle,
+    id,
+    'aria-describedby': ariaDescribedby,
 }: {
     enabled: boolean
     onToggle: () => void
+    id?: string
+    'aria-describedby'?: string
 }) {
     return (
         <button
+            id={id}
             onClick={onToggle}
             className={cn(
                 'relative w-11 h-6 rounded-full transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 enabled ? 'bg-primary' : 'bg-muted'
             )}
             role="switch"
             aria-checked={enabled}
+            aria-describedby={ariaDescribedby}
         >
             <motion.div
                 animate={{ x: enabled ? 20 : 2 }}

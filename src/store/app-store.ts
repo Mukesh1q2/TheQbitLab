@@ -33,10 +33,10 @@ export const THEMES: Theme[] = [
     description: 'Clean & professional with Swiss design principles',
     preview: '✨',
     colors: {
-      primary: '#1A1A1A',
-      secondary: '#F5F5F5',
-      accent: '#D4AF37',
-      background: '#FFFFFF',
+      primary: '#242B38',      // P0 FIX: Deep charcoal
+      secondary: '#F5F7FA',    // P0 FIX: Soft off-white
+      accent: '#C9A227',       // P0 FIX: Rich gold
+      background: '#F8FAFC',   // P0 FIX: Warm cream white
     },
   },
   {
@@ -45,10 +45,10 @@ export const THEMES: Theme[] = [
     description: 'The Matrix inspired - digital rain & CRT effects',
     preview: '💻',
     colors: {
-      primary: '#000000',
-      secondary: '#00FF41',
-      accent: '#008F11',
-      background: '#0D0208',
+      primary: '#0A0D0A',      // P0 FIX: Very dark with green tint
+      secondary: '#4D8B4D',    // P0 FIX: Desaturated sage green
+      accent: '#D4922C',       // P0 FIX: Amber for hierarchy
+      background: '#080A08',   // P0 FIX: Dark with subtle green
     },
   },
   {
@@ -57,10 +57,10 @@ export const THEMES: Theme[] = [
     description: 'iPhone-inspired frosted glass with depth',
     preview: '🎨',
     colors: {
-      primary: '#F5F5F7',
-      secondary: '#E8E8ED',
-      accent: '#007AFF',
-      background: '#F2F2F7',
+      primary: '#E8ECF2',      // P0 FIX: Cool gray base
+      secondary: '#F5F8FC',    // P0 FIX: Bright card color
+      accent: '#0A84FF',       // P0 FIX: iOS blue
+      background: '#E6EBF2',   // P0 FIX: Soft cool gray
     },
   },
   {
@@ -69,10 +69,10 @@ export const THEMES: Theme[] = [
     description: 'Retro sunset, neon grid & synthwave vibes',
     preview: '🌈',
     colors: {
-      primary: '#FF2975',
-      secondary: '#00F0FF',
-      accent: '#7B2FBF',
-      background: '#0A0A12',
+      primary: '#D94F8C',      // P1 FIX: Softer pink
+      secondary: '#5CB8B8',    // P1 FIX: Teal instead of neon cyan
+      accent: '#8B5CC4',       // P1 FIX: Softer purple
+      background: '#161422',   // P1 FIX: Warmer dark
     },
   },
 ]
@@ -122,6 +122,11 @@ interface AppState {
   particleEffects: boolean
   soundEnabled: boolean
 
+  // P1 Features
+  effectIntensity: number        // 0-100 master control for all effects
+  performanceMode: boolean       // Disables all effects when true
+  previewTheme: Theme | null     // For live preview before committing
+
   // Actions
   setTheme: (theme: Theme) => void
   setCustomization: (customization: Partial<ThemeCustomization>) => void
@@ -132,6 +137,12 @@ interface AppState {
   setAnimationSpeed: (speed: 'slow' | 'normal' | 'fast') => void
   toggleParticleEffects: () => void
   toggleSound: () => void
+
+  // P1 Actions
+  setEffectIntensity: (intensity: number) => void
+  togglePerformanceMode: () => void
+  setPreviewTheme: (theme: Theme | null) => void
+  applyPreviewTheme: () => void
 }
 
 export const useAppStore = create<AppState>()(
@@ -146,8 +157,13 @@ export const useAppStore = create<AppState>()(
       particleEffects: true,
       soundEnabled: false,
 
+      // P1 defaults
+      effectIntensity: 70,          // Default to 70% intensity
+      performanceMode: true,        // Enabled by default for better performance
+      previewTheme: null,
+
       setTheme: (theme) => {
-        set({ theme })
+        set({ theme, previewTheme: null })
         document.documentElement.className = `theme-${theme.id}`
         document.documentElement.setAttribute('data-theme', theme.id)
       },
@@ -173,6 +189,62 @@ export const useAppStore = create<AppState>()(
       toggleSound: () => set((state) => ({
         soundEnabled: !state.soundEnabled
       })),
+
+      // P1 Actions
+      setEffectIntensity: (intensity) => set({ effectIntensity: Math.max(0, Math.min(100, intensity)) }),
+
+      togglePerformanceMode: () => set((state) => {
+        const newMode = !state.performanceMode
+        // When enabling performance mode, disable all heavy features but remember previous settings
+        if (newMode) {
+          // Store current settings to restore later (using a simple approach - storing in the state)
+          return {
+            performanceMode: true,
+            // Store previous particleEffects state
+            _previousParticleEffects: state.particleEffects,
+            _previousBackgroundStyle: state.customization.backgroundStyle,
+            particleEffects: false,
+            customization: {
+              ...state.customization,
+              show3DBackground: false,
+              showSkillConstellation: false,
+              cursorEffects: false,
+              badgeFollowCursor: false,
+              backgroundStyle: 'off' as const,
+            }
+          }
+        }
+        // When disabling performance mode, restore previous settings
+        const prevParticle = (state as any)._previousParticleEffects ?? true
+        const prevBgStyle = (state as any)._previousBackgroundStyle ?? 'minimal'
+        return {
+          performanceMode: false,
+          particleEffects: prevParticle,
+          customization: {
+            ...state.customization,
+            backgroundStyle: prevBgStyle,
+          }
+        }
+      }),
+
+      setPreviewTheme: (theme) => {
+        set({ previewTheme: theme })
+        // Apply preview to DOM without committing
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme.id)
+        } else {
+          // Revert to current theme
+          const currentTheme = get().theme
+          document.documentElement.setAttribute('data-theme', currentTheme.id)
+        }
+      },
+
+      applyPreviewTheme: () => {
+        const preview = get().previewTheme
+        if (preview) {
+          get().setTheme(preview)
+        }
+      },
     }),
     {
       name: 'theqbitlabs-app-storage',
@@ -182,6 +254,8 @@ export const useAppStore = create<AppState>()(
         animationSpeed: state.animationSpeed,
         particleEffects: state.particleEffects,
         soundEnabled: state.soundEnabled,
+        effectIntensity: state.effectIntensity,
+        performanceMode: state.performanceMode,
       }),
     }
   )

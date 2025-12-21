@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Page Not Found | TheQbitlabs',
@@ -7,10 +7,6 @@ export const metadata: Metadata = {
 }
 
 export default function NotFound() {
-  notFound()
-}
-
-export function NotFoundComponent() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="text-center">
@@ -21,21 +17,21 @@ export function NotFoundComponent() {
             Sorry, we couldn't find the page you're looking for.
           </p>
         </div>
-        
+
         <div className="space-y-4">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
           >
             Go Home
-          </a>
-          
+          </Link>
+
           <div className="text-sm text-muted-foreground">
             <p>Or try one of these popular pages:</p>
             <div className="mt-4 space-x-4">
-              <a href="/projects" className="text-primary hover:underline">Projects</a>
-              <a href="/services" className="text-primary hover:underline">Services</a>
-              <a href="/contact" className="text-primary hover:underline">Contact</a>
+              <Link href="/projects" className="text-primary hover:underline">Projects</Link>
+              <Link href="/services" className="text-primary hover:underline">Services</Link>
+              <Link href="/contact" className="text-primary hover:underline">Contact</Link>
             </div>
           </div>
         </div>

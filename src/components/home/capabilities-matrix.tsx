@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useAppStore } from '@/store/app-store'
 import { cn } from '@/lib/utils'
-import { 
-  Code, 
-  Smartphone, 
-  Brain, 
-  Palette, 
-  Database, 
-  Cloud, 
-  Shield, 
+import {
+  Code,
+  Smartphone,
+  Brain,
+  Palette,
+  Database,
+  Cloud,
+  Shield,
   Zap,
   Settings,
   Globe,
@@ -33,94 +33,64 @@ interface Capability {
 
 const capabilities: Capability[] = [
   {
-    id: 'frontend',
-    title: 'Frontend Development',
-    description: 'Building responsive, performant, and accessible web applications with modern frameworks and best practices.',
-    icon: Code,
-    level: 5,
-    projects: ['Quantum Portfolio', 'SaaS Dashboard', 'AR Commerce'],
-    category: 'frontend',
-    technologies: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Tailwind CSS'],
-  },
-  {
-    id: 'mobile',
-    title: 'Mobile Development',
-    description: 'Cross-platform mobile applications with native performance and seamless user experiences.',
-    icon: Smartphone,
-    level: 4,
-    projects: ['AR Commerce', 'Fitness App', 'E-commerce Mobile'],
-    category: 'frontend',
-    technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Expo'],
-  },
-  {
     id: 'ai-ml',
     title: 'AI & Machine Learning',
-    description: 'Implementing cutting-edge AI solutions including LLMs, computer vision, and predictive analytics.',
+    description: 'Making machines smart—not just chatbot-smart, but actually-understands-context smart. From LLMs to Computer Vision to Deep Learning, I build AI that thinks, evolves, and scales.',
     icon: Brain,
     level: 5,
-    projects: ['AI Chat Platform', 'ML Pipeline', 'Smart Analytics'],
+    projects: ['Brahm AI', 'VedaQ AI', 'NeuroSymbiotic CodeMind'],
     category: 'ai',
-    technologies: ['OpenAI', 'TensorFlow', 'PyTorch', 'LangChain', 'Hugging Face'],
+    technologies: ['PyTorch', 'TensorFlow', 'OpenCV', 'OpenAI API', 'Vision Transformers'],
   },
   {
-    id: 'ui-ux',
-    title: 'UI/UX Design',
-    description: 'Creating intuitive, beautiful, and accessible user interfaces with focus on user experience.',
-    icon: Palette,
-    level: 4,
-    projects: ['Design System', 'Mobile App UI', 'Dashboard Design'],
-    category: 'design',
-    technologies: ['Figma', 'Adobe XD', 'Framer', 'Sketch', 'Principle'],
-  },
-  {
-    id: 'backend',
-    title: 'Backend Development',
-    description: 'Scalable server-side applications, APIs, and microservices with robust architecture.',
-    icon: Database,
+    id: 'fullstack',
+    title: 'Full-Stack Development',
+    description: 'Building the part you actually see and click. I create responsive, performant web apps that don\'t break when real users show up. Clean code, reliable systems, human-centered design.',
+    icon: Code,
     level: 5,
-    projects: ['API Gateway', 'SaaS Backend', 'E-commerce Platform'],
-    category: 'backend',
-    technologies: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Redis'],
+    projects: ['Quantum Playground', 'VedaQ AI', 'OCR Pipeline'],
+    category: 'frontend',
+    technologies: ['React 19', 'Next.js', 'Node.js', 'TailwindCSS', 'Framer Motion'],
   },
   {
-    id: 'cloud',
-    title: 'Cloud & DevOps',
-    description: 'Deploying and managing applications in the cloud with automated CI/CD pipelines.',
+    id: 'infrastructure',
+    title: 'Infrastructure & DevOps',
+    description: 'Making sure everything stays online. The boring-but-vital cloud infrastructure that keeps the lights on. Containerization, deployments, and the automation that makes developers\' lives easier.',
     icon: Cloud,
     level: 4,
-    projects: ['Kubernetes Deploy', 'AWS Migration', 'CI/CD Pipeline'],
+    projects: ['OCR Pipeline', 'Brahm AI Backend', 'Production Deployments'],
     category: 'devops',
-    technologies: ['AWS', 'Docker', 'Kubernetes', 'GitHub Actions', 'Terraform'],
+    technologies: ['GCP', 'AWS', 'Docker', 'Firebase', 'FastAPI'],
   },
   {
-    id: 'security',
-    title: 'Cybersecurity',
-    description: 'Implementing security best practices, authentication, and data protection measures.',
-    icon: Shield,
-    level: 4,
-    projects: ['Security Audit', 'Auth System', 'Data Protection'],
-    category: 'security',
-    technologies: ['OAuth', 'JWT', 'bcrypt', 'Helmet', 'Rate Limiting'],
-  },
-  {
-    id: 'performance',
-    title: 'Performance Optimization',
-    description: 'Optimizing applications for speed, scalability, and excellent user experience.',
-    icon: Zap,
-    level: 5,
-    projects: ['Performance Audit', 'Speed Optimization', 'CDN Setup'],
-    category: 'devops',
-    technologies: ['Web Vitals', 'Lighthouse', 'Webpack', 'CDN', 'Caching'],
-  },
-  {
-    id: 'architecture',
+    id: 'system-design',
     title: 'System Architecture',
-    description: 'Designing scalable, maintainable, and robust system architectures for complex applications.',
+    description: 'Drawing the big boxes and arrows so the code doesn\'t turn into spaghetti. Designing scalable, maintainable architectures that grow with your product—not against it.',
     icon: Layers,
     level: 5,
-    projects: ['Microservices', 'Monolith Refactor', 'Architecture Review'],
+    projects: ['Brahm AI Framework', 'VedaQ Architecture', 'Enterprise APIs'],
     category: 'backend',
-    technologies: ['Microservices', 'Event-Driven', 'CQRS', 'Clean Architecture', 'DDD'],
+    technologies: ['Microservices', 'Event-Driven', 'Clean Architecture', 'REST', 'GraphQL'],
+  },
+  {
+    id: 'llm-apps',
+    title: 'Custom LLM Applications',
+    description: 'Taking you beyond a basic ChatGPT prompt into a real product. RAG systems, fine-tuned models, and AI apps that actually solve your specific problem—not just generic chatbots.',
+    icon: Cpu,
+    level: 5,
+    projects: ['VedaQ AI', 'Brahm AI', 'Enterprise LLM Tools'],
+    category: 'ai',
+    technologies: ['LangChain', 'OpenAI', 'Hugging Face', 'RAG', 'Vector DBs'],
+  },
+  {
+    id: 'prototyping',
+    title: 'R&D Prototyping',
+    description: 'Turning your "what if" ideas into a working demo in weeks, not months. I help figure out if you actually need an AI or just a really good script—then build whichever makes sense.',
+    icon: Zap,
+    level: 5,
+    projects: ['NeuroSymbiotic CodeMind', 'Quantum Experiments', 'AI Research'],
+    category: 'ai',
+    technologies: ['Rapid Prototyping', 'POC Development', 'Technical Validation', 'MVP'],
   },
 ]
 
@@ -170,11 +140,11 @@ export function CapabilitiesMatrix() {
             theme.id === 'neumorphic' && 'text-gray-700',
             theme.id === 'vaporwave' && 'holographic font-display'
           )}>
-            Capabilities Matrix
+            How I Can Help You
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive overview of my technical expertise across different domains, 
-            with real project examples and proven experience.
+            Whether you need AI architecture, custom LLM apps, or full-stack engineering—
+            I turn your "what if" ideas into working products. Here's what I bring to the table.
           </p>
         </motion.div>
 
@@ -183,7 +153,7 @@ export function CapabilitiesMatrix() {
           {capabilities.map((capability, index) => {
             const Icon = capability.icon
             const categoryColor = categories.find(c => c.id === capability.category)?.color || 'from-gray-500 to-gray-600'
-            
+
             return (
               <motion.div
                 key={capability.id}
@@ -208,7 +178,7 @@ export function CapabilitiesMatrix() {
                   'absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-10 group-hover:opacity-20 transition-opacity duration-500',
                   categoryColor
                 )} />
-                
+
                 {/* Icon */}
                 <div className="relative z-10">
                   <div className={cn(
@@ -228,17 +198,17 @@ export function CapabilitiesMatrix() {
                       theme.id === 'vaporwave' && 'text-vaporwave-cyan'
                     )} />
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {capability.title}
                   </h3>
-                  
+
                   {/* Description */}
                   <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                     {capability.description}
                   </p>
-                  
+
                   {/* Level Indicator */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -247,7 +217,7 @@ export function CapabilitiesMatrix() {
                         {getLevelText(capability.level)}
                       </span>
                     </div>
-                    
+
                     {/* Progress Bar */}
                     <div className="flex gap-1">
                       {Array.from({ length: 5 }, (_, i) => (
@@ -255,21 +225,21 @@ export function CapabilitiesMatrix() {
                           key={i}
                           className={cn(
                             'w-2 h-2 rounded-full transition-colors duration-300',
-                            i < capability.level 
-                              ? `bg-gradient-to-r ${categoryColor}` 
+                            i < capability.level
+                              ? `bg-gradient-to-r ${categoryColor}`
                               : 'bg-gray-200 dark:bg-gray-700'
                           )}
                         />
                       ))}
                     </div>
                   </div>
-                  
+
                   {/* Project Count */}
                   <div className="mt-3 text-xs text-muted-foreground">
                     {capability.projects.length} related projects
                   </div>
                 </div>
-                
+
                 {/* Hover Effect */}
                 <AnimatePresence>
                   {hoveredCapability === capability.id && (
@@ -396,8 +366,8 @@ export function CapabilitiesMatrix() {
                           key={i}
                           className={cn(
                             'w-3 h-3 rounded-full',
-                            i < selectedCapability.level 
-                              ? 'bg-green-500' 
+                            i < selectedCapability.level
+                              ? 'bg-green-500'
                               : 'bg-gray-200 dark:bg-gray-700'
                           )}
                         />
@@ -406,11 +376,11 @@ export function CapabilitiesMatrix() {
                   </div>
                 </div>
               </div>
-              
+
               <p className="text-muted-foreground mb-6">
                 {selectedCapability.description}
               </p>
-              
+
               <div className="space-y-6">
                 <div>
                   <h4 className="font-semibold mb-3">Related Projects</h4>
@@ -432,7 +402,7 @@ export function CapabilitiesMatrix() {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold mb-3">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
@@ -454,7 +424,7 @@ export function CapabilitiesMatrix() {
                   </div>
                 </div>
               </div>
-              
+
               <button
                 onClick={() => setSelectedCapability(null)}
                 className={cn(

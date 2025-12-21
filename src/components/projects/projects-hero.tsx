@@ -6,51 +6,50 @@ import { ArrowRight, Github, ExternalLink, Play, Star, Eye, Code, Zap } from 'lu
 import { cn } from '@/lib/utils'
 
 const projectStats = [
-  { label: 'Projects Completed', value: '50+', icon: '🚀' },
-  { label: 'Happy Clients', value: '25+', icon: '😊' },
-  { label: 'Technologies Used', value: '20+', icon: '⚡' },
-  { label: 'Success Rate', value: '98%', icon: '⭐' }
+  { label: 'Projects Completed', value: '9+', icon: '🚀' },
+  { label: 'Happy Clients', value: '15+', icon: '😊' },
+  { label: 'Technologies Used', value: '25+', icon: '⚡' },
+  { label: 'Success Rate', value: '100%', icon: '⭐' }
 ]
 
 const featuredProjects = [
   {
-    id: 'ai-chatbot',
-    title: 'AI Customer Service Bot',
-    description: 'Intelligent chatbot with natural language processing and machine learning capabilities.',
+    id: 'brahm-ai',
+    title: 'Brahm AI — Deep Philosophy',
+    description: 'AI framework inspired by Vedic systems simulating higher-order cognition with symbolic AI and neural hybrids.',
     category: 'AI/ML',
-    tech: ['React', 'Node.js', 'OpenAI API', 'MongoDB'],
+    tech: ['Python', 'PyTorch', 'React 19', 'TypeScript', 'Firebase'],
     status: 'Completed',
     rating: 4.9,
-    views: 1200
+    views: 12450
   },
   {
-    id: 'ecommerce-platform',
-    title: 'Modern E-commerce Platform',
-    description: 'Full-stack e-commerce solution with payment integration and inventory management.',
+    id: 'synthesis',
+    title: 'Synthesis — Cognitive Commons',
+    description: 'Revolutionary platform for collaborative decision-making with AI-enhanced reasoning and real-time insights.',
+    category: 'AI/ML',
+    tech: ['Next.js', 'TypeScript', 'OpenAI API', 'Firebase'],
+    status: 'Completed',
+    rating: 4.9,
+    views: 4210
+  },
+  {
+    id: 'novagen-automation',
+    title: 'NovaGen Automation',
+    description: 'Premium industrial automation website with AI-powered chatbot using Gemini API and glassmorphism UI.',
     category: 'Web Development',
-    tech: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL'],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Gemini API'],
     status: 'Completed',
     rating: 4.8,
-    views: 980
-  },
-  {
-    id: 'analytics-dashboard',
-    title: 'Real-time Analytics Dashboard',
-    description: 'Interactive dashboard for data visualization and business intelligence.',
-    category: 'Data Visualization',
-    tech: ['React', 'D3.js', 'WebSocket', 'Redis'],
-    status: 'In Progress',
-    rating: 4.7,
-    views: 750
+    views: 3890
   }
 ]
 
 const categories = [
-  { name: 'All Projects', count: 50, active: true },
-  { name: 'AI/ML', count: 15, active: false },
-  { name: 'Web Development', count: 20, active: false },
-  { name: 'Mobile Apps', count: 8, active: false },
-  { name: 'Data Visualization', count: 7, active: false }
+  { name: 'All Projects', count: 9, active: true },
+  { name: 'AI/ML', count: 5, active: false },
+  { name: 'Web Development', count: 3, active: false },
+  { name: 'SaaS', count: 1, active: false }
 ]
 
 export function ProjectsHero() {
@@ -91,7 +90,7 @@ export function ProjectsHero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative py-20 pt-32 overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background">
         {/* Animated Grid */}
@@ -163,7 +162,7 @@ export function ProjectsHero() {
             variants={itemVariants}
             className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-12"
           >
-            Explore our collection of innovative projects spanning AI, web development, 
+            Explore our collection of innovative projects spanning AI, web development,
             mobile applications, and cutting-edge technologies.
           </motion.p>
 
@@ -270,7 +269,7 @@ export function ProjectsHero() {
                     </div>
                     <span className={cn(
                       'px-2 py-1 rounded-full text-xs',
-                      project.status === 'Completed' 
+                      project.status === 'Completed'
                         ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                         : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
                     )}>
@@ -316,7 +315,7 @@ export function ProjectsHero() {
           <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
             <h3 className="text-2xl font-bold mb-4">Have a Project in Mind?</h3>
             <p className="text-muted-foreground mb-6">
-              Let's collaborate and bring your vision to life. From concept to deployment, 
+              Let's collaborate and bring your vision to life. From concept to deployment,
               we create solutions that make an impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

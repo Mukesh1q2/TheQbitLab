@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { MotionDiv } from '@/components/ui/motion'
 import { useInView } from 'react-intersection-observer'
 import { useAppStore } from '@/store/app-store'
 import { cn } from '@/lib/utils'
@@ -83,7 +83,7 @@ function Counter({ value, suffix, duration = 2000 }: { value: number; suffix: st
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime
       const progress = Math.min((currentTime - startTime) / duration, 1)
-      
+
       // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4)
       setCount(Math.floor(value * easeOutQuart))
@@ -115,7 +115,7 @@ export function StatsSection() {
   return (
     <section className="py-20 bg-gradient-to-br from-secondary/50 to-accent/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -133,14 +133,14 @@ export function StatsSection() {
             Numbers That Speak
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real metrics from real projects. Every number tells a story of dedication, 
+            Real metrics from real projects. Every number tells a story of dedication,
             innovation, and successful delivery.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {stats.map((stat, index) => (
-            <motion.div
+            <MotionDiv
               key={stat.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -157,20 +157,20 @@ export function StatsSection() {
               )}
             >
               <div className="text-4xl mb-3">{stat.icon}</div>
-              
+
               <div className={cn(
                 'text-2xl sm:text-3xl font-bold mb-2',
                 `bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`
               )}>
                 <Counter value={stat.value} suffix={stat.suffix} />
               </div>
-              
+
               <div className="text-sm text-muted-foreground font-medium">
                 {stat.label}
               </div>
-              
+
               {/* Animated progress bar */}
-              <motion.div
+              <MotionDiv
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -181,12 +181,12 @@ export function StatsSection() {
                 )}
                 style={{ originX: 0 }}
               />
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
 
         {/* Fun facts */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -205,7 +205,7 @@ export function StatsSection() {
             <span>All statistics are real and updated in real-time</span>
             <span className="animate-pulse">✨</span>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   )

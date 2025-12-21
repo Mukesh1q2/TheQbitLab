@@ -111,7 +111,7 @@ export function ProductGrid() {
   const [wishlist, setWishlist] = useState<Set<string>>(new Set())
 
   // Filter products
-  const filteredProducts = allProducts.filter(product => 
+  const filteredProducts = allProducts.filter(product =>
     selectedCategory === 'All' || product.category === selectedCategory
   )
 
@@ -235,9 +235,9 @@ export function ProductGrid() {
 
         {/* Products Grid */}
         <div className={cn(
-          viewMode === 'grid' 
-            ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
-            : 'space-y-4'
+          viewMode === 'grid'
+            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
+            : 'space-y-4 max-w-4xl mx-auto'
         )}>
           <AnimatePresence mode="wait">
             {sortedProducts.map((product, index) => (
@@ -263,7 +263,7 @@ export function ProductGrid() {
                     viewMode === 'list' ? 'w-32 h-32 flex-shrink-0' : 'aspect-video'
                   )}>
                     <div className="text-4xl opacity-30">📦</div>
-                    
+
                     {/* Badges */}
                     <div className="absolute top-2 left-2 flex gap-1">
                       {product.bestseller && (

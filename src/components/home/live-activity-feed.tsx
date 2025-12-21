@@ -6,12 +6,12 @@ import { useInView } from 'react-intersection-observer'
 import { useAppStore } from '@/store/app-store'
 import { cn } from '@/lib/utils'
 import { formatRelativeTime } from '@/lib/utils'
-import { 
-  Github, 
-  Twitter, 
-  ExternalLink, 
-  Star, 
-  GitFork, 
+import {
+  Github,
+  Twitter,
+  ExternalLink,
+  Star,
+  GitFork,
   Eye,
   MessageCircle,
   Heart,
@@ -19,7 +19,8 @@ import {
   Download,
   ShoppingCart,
   Code,
-  Zap
+  Zap,
+  RefreshCw
 } from 'lucide-react'
 
 interface Activity {
@@ -155,28 +156,43 @@ const activityColors = {
 export function LiveActivityFeed() {
   const [displayedActivities, setDisplayedActivities] = useState<Activity[]>([])
   const [isRealTime, setIsRealTime] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date())
   const { theme } = useAppStore()
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
+  // Shuffle and get 5 random activities
+  const getRandomActivities = () => {
+    const shuffled = [...activities].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, 5)
+  }
+
   useEffect(() => {
-    // Show initial activities
-    setDisplayedActivities(activities.slice(0, 5))
+    // Show initial 5 activities
+    setDisplayedActivities(getRandomActivities())
   }, [])
 
+  // Auto-refresh every 24 hours
   useEffect(() => {
     if (!isRealTime) return
 
     const interval = setInterval(() => {
-      // Simulate new activities appearing
-      const nextActivity = activities[Math.floor(Math.random() * activities.length)]
-      setDisplayedActivities(prev => {
-        const updated = [nextActivity, ...prev.slice(0, 4)]
-        return updated
-      })
-    }, 10000) // New activity every 10 seconds
+      setDisplayedActivities(getRandomActivities())
+      setLastRefresh(new Date())
+    }, 86400000) // Refresh every 24 hours
 
     return () => clearInterval(interval)
   }, [isRealTime])
+
+  // Manual refresh handler
+  const handleRefresh = () => {
+    setIsRefreshing(true)
+    setTimeout(() => {
+      setDisplayedActivities(getRandomActivities())
+      setLastRefresh(new Date())
+      setIsRefreshing(false)
+    }, 500)
+  }
 
   const getActivityIcon = (type: Activity['type']) => {
     const Icon = activityIcons[type]
@@ -222,36 +238,63 @@ export function LiveActivityFeed() {
             />
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            Real-time updates from my development journey, including GitHub activity, 
+            Real-time updates from my development journey, including GitHub activity,
             project deployments, client work, and marketplace sales.
           </p>
-          
-          {/* Real-time Toggle */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsRealTime(!isRealTime)}
-            className={cn(
-              'inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300',
-              isRealTime
-                ? theme.id === 'quantum' && 'bg-green-500/20 text-green-400 border border-green-500/30'
-                || theme.id === 'terminal' && 'bg-terminal-green/20 text-terminal-green border border-terminal-green/30'
-                || theme.id === 'minimalist' && 'bg-green-100 text-green-700 border border-green-200'
-                || theme.id === 'neumorphic' && 'bg-green-100 text-green-600 border border-green-200'
-                || theme.id === 'vaporwave' && 'bg-green-400/20 text-green-400 border border-green-400/30'
-                : theme.id === 'quantum' && 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-                || theme.id === 'terminal' && 'bg-gray-600/20 text-gray-400 border border-gray-600/30'
-                || theme.id === 'minimalist' && 'bg-gray-100 text-gray-500 border border-gray-200'
-                || theme.id === 'neumorphic' && 'bg-gray-100 text-gray-500 border border-gray-200'
-                || theme.id === 'vaporwave' && 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-            )}
-          >
-            <div className={cn(
-              'w-2 h-2 rounded-full',
-              isRealTime ? 'bg-current animate-pulse' : 'bg-current/50'
-            )} />
-            {isRealTime ? 'Live Updates On' : 'Live Updates Off'}
-          </motion.button>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-3">
+            {/* Refresh Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              className={cn(
+                'inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300',
+                theme.id === 'quantum' && 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/30',
+                theme.id === 'terminal' && 'bg-terminal-green/20 text-terminal-green border border-terminal-green/30',
+                theme.id === 'minimalist' && 'bg-blue-100 text-blue-700 border border-blue-200 hover:bg-blue-200',
+                theme.id === 'neumorphic' && 'bg-blue-100 text-blue-600 border border-blue-200',
+                theme.id === 'vaporwave' && 'bg-vaporwave-cyan/20 text-vaporwave-cyan border border-vaporwave-cyan/30'
+              )}
+            >
+              <RefreshCw className={cn('w-4 h-4', isRefreshing && 'animate-spin')} />
+              Refresh
+            </motion.button>
+
+            {/* Real-time Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsRealTime(!isRealTime)}
+              className={cn(
+                'inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300',
+                isRealTime
+                  ? theme.id === 'quantum' && 'bg-green-500/20 text-green-400 border border-green-500/30'
+                  || theme.id === 'terminal' && 'bg-terminal-green/20 text-terminal-green border border-terminal-green/30'
+                  || theme.id === 'minimalist' && 'bg-green-100 text-green-700 border border-green-200'
+                  || theme.id === 'neumorphic' && 'bg-green-100 text-green-600 border border-green-200'
+                  || theme.id === 'vaporwave' && 'bg-green-400/20 text-green-400 border border-green-400/30'
+                  : theme.id === 'quantum' && 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                  || theme.id === 'terminal' && 'bg-gray-600/20 text-gray-400 border border-gray-600/30'
+                  || theme.id === 'minimalist' && 'bg-gray-100 text-gray-500 border border-gray-200'
+                  || theme.id === 'neumorphic' && 'bg-gray-100 text-gray-500 border border-gray-200'
+                  || theme.id === 'vaporwave' && 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+              )}
+            >
+              <div className={cn(
+                'w-2 h-2 rounded-full',
+                isRealTime ? 'bg-current animate-pulse' : 'bg-current/50'
+              )} />
+              {isRealTime ? 'Auto-Refresh (24h)' : 'Auto-Refresh Off'}
+            </motion.button>
+          </div>
+
+          {/* Last Refresh Time */}
+          <p className="text-xs text-muted-foreground mt-3" suppressHydrationWarning>
+            Last updated: {lastRefresh.toLocaleString()}
+          </p>
         </motion.div>
 
         {/* Activity Feed */}
@@ -266,7 +309,7 @@ export function LiveActivityFeed() {
               {displayedActivities.map((activity, index) => {
                 const Icon = getActivityIcon(activity.type)
                 const colorClass = getActivityColor(activity.type)
-                
+
                 return (
                   <motion.div
                     key={activity.id}
@@ -304,7 +347,7 @@ export function LiveActivityFeed() {
                           {formatRelativeTime(activity.timestamp)}
                         </span>
                       </div>
-                      
+
                       <p className="text-muted-foreground text-sm mb-4">
                         {activity.description}
                       </p>
