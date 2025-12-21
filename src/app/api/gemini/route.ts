@@ -1,14 +1,18 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenAI } from '@google/genai'
 import { NextRequest, NextResponse } from 'next/server'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // Available Gemini models
+// Maps UI IDs to actual model names supported by the SDK
 const MODELS = {
     'gemini-1.5-flash': 'gemini-1.5-flash',
     'gemini-1.5-pro': 'gemini-1.5-pro',
     'gemini-2.0-flash': 'gemini-2.0-flash-exp',
-    'gemini-2.5-flash': 'gemini-2.5-flash-preview-05-20',
-    'gemini-2.5-pro': 'gemini-2.5-pro-preview-05-06',
-    'gemini-3.0-flash': 'gemini-exp-1206',
+    'gemini-2.5-flash': 'gemini-2.0-flash-exp', // Mapping generic 2.5 request to 2.0 exp for now as closest match
+    'gemini-2.5-pro': 'gemini-2.0-flash-exp',   // Mapping generic 2.5 request to 2.0 exp
+    'gemini-3.0-flash': 'gemini-3-flash-preview',
 } as const
 
 export async function POST(request: NextRequest) {
@@ -28,34 +32,39 @@ export async function POST(request: NextRequest) {
             }, { status: 200 })
         }
 
-        const genAI = new GoogleGenerativeAI(apiKey)
-        const modelInstance = genAI.getGenerativeModel({
-            model: MODELS[model as keyof typeof MODELS] || 'gemini-1.5-flash'
+        const formattedModel = MODELS[model as keyof typeof MODELS] || 'gemini-1.5-flash'
+        const ai = new GoogleGenAI({ apiKey })
+
+        // Construct contents
+        const contents = history.map((msg: { role: string; content: string }) => ({
+            role: msg.role === 'user' ? 'user' : 'model',
+            parts: [{ text: msg.content }],
+        }))
+
+        contents.push({
+            role: 'user',
+            parts: [{ text: message }]
         })
 
-        // Build chat history
-        const chat = modelInstance.startChat({
-            history: history.map((msg: { role: string; content: string }) => ({
-                role: msg.role === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.content }],
-            })),
+        // Generate content
+        const response = await ai.models.generateContent({
+            model: formattedModel,
+            contents: contents,
         })
 
-        // Send message and get response
-        const result = await chat.sendMessage(message)
-        const response = result.response.text()
+        const responseText = response.text || ''
 
         return NextResponse.json({
-            response,
-            model: MODELS[model as keyof typeof MODELS] || 'gemini-1.5-flash',
+            response: responseText,
+            model: formattedModel,
             demo: false
         })
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Gemini API error:', error)
         return NextResponse.json({
             error: 'Failed to get AI response',
-            details: error instanceof Error ? error.message : 'Unknown error'
+            details: error?.message || 'Unknown error'
         }, { status: 500 })
     }
 }
@@ -78,8 +87,6 @@ export async function GET() {
             { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', description: 'Fast & efficient' },
             { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', description: 'Capable' },
             { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', description: 'Latest stable' },
-            { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', description: 'Preview' },
-            { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', description: 'Preview pro' },
             { id: 'gemini-3.0-flash', name: 'Gemini 3.0', description: 'Experimental' },
         ],
         status: process.env.GEMINI_API_KEY ? 'configured' : 'demo_mode'
