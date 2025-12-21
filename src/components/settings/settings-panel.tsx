@@ -451,7 +451,6 @@ export function SettingsPanel() {
                 </>
             )}
         </AnimatePresence>
-        </AnimatePresence >
     )
 }
 

@@ -138,6 +138,7 @@ interface AppState {
   toggleParticleEffects: () => void
   toggleSound: () => void
 
+  setEffectIntensity: (intensity: number) => void
   togglePerformanceMode: () => void
   setPreviewTheme: (theme: Theme | null) => void
   applyPreviewTheme: () => void
@@ -244,6 +245,7 @@ export const useAppStore = create<AppState>()(
       },
 
       applyPreviewTheme: () => {
+        const preview = get().previewTheme
         if (preview) {
           get().setTheme(preview)
         }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Providers } from '@/components/providers'
 import { Toaster } from 'react-hot-toast'
@@ -142,6 +143,7 @@ export default function RootLayout({
               },
             }}
           />
+          <Analytics />
         </Providers>
       </body>
     </html>
