@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Palette, ChevronDown } from 'lucide-react'
+import { Menu, X, Palette, ChevronDown, Settings } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useAppStore, THEMES } from '@/store/app-store'
@@ -24,7 +24,7 @@ export function MainNav() {
   const [isOpen, setIsOpen] = useState(false)
   const [showThemeMenu, setShowThemeMenu] = useState(false)
   const pathname = usePathname()
-  const { theme, setTheme } = useAppStore()
+  const { theme, setTheme, toggleSettings } = useAppStore()
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -115,6 +115,22 @@ export function MainNav() {
                         </div>
                       </button>
                     ))}
+                    <div className="border-t border-border my-1" />
+                    <button
+                      onClick={() => {
+                        toggleSettings()
+                        setShowThemeMenu(false)
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <Settings className="w-5 h-5 p-0.5" />
+                        <div>
+                          <div className="font-medium">Advanced Settings</div>
+                          <div className="text-xs text-muted-foreground">Animations & Effects</div>
+                        </div>
+                      </div>
+                    </button>
                   </div>
                 </div>
               )}

@@ -138,11 +138,14 @@ interface AppState {
   toggleParticleEffects: () => void
   toggleSound: () => void
 
-  // P1 Actions
-  setEffectIntensity: (intensity: number) => void
   togglePerformanceMode: () => void
   setPreviewTheme: (theme: Theme | null) => void
   applyPreviewTheme: () => void
+
+  // Settings Panel Control
+  isSettingsOpen: boolean
+  toggleSettings: () => void
+  setSettingsOpen: (open: boolean) => void
 }
 
 export const useAppStore = create<AppState>()(
@@ -161,6 +164,7 @@ export const useAppStore = create<AppState>()(
       effectIntensity: 70,          // Default to 70% intensity
       performanceMode: true,        // Enabled by default for better performance
       previewTheme: null,
+      isSettingsOpen: false,
 
       setTheme: (theme) => {
         set({ theme, previewTheme: null })
@@ -240,11 +244,13 @@ export const useAppStore = create<AppState>()(
       },
 
       applyPreviewTheme: () => {
-        const preview = get().previewTheme
         if (preview) {
           get().setTheme(preview)
         }
       },
+
+      toggleSettings: () => set((state) => ({ isSettingsOpen: !state.isSettingsOpen })),
+      setSettingsOpen: (open) => set({ isSettingsOpen: open }),
     }),
     {
       name: 'theqbitlabs-app-storage',
