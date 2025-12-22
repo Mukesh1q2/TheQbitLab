@@ -40,7 +40,7 @@ export function ContactHero() {
           className="text-5xl md:text-6xl font-bold mb-6"
         >
           <span className="bg-gradient-to-r from-primary via-cyan-400 to-primary bg-clip-text text-transparent">
-            Get In Touch
+            Let's Build Something Real
           </span>
         </motion.h1>
 
@@ -50,7 +50,7 @@ export function ContactHero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
         >
-          Ready to bring your ideas to life? Let's discuss your next project and create something extraordinary together.
+          If you're looking for someone who understands AI beyond buzzwords, thinks in systems, and cares about shipping — then we should talk.
         </motion.p>
 
         {/* Quick Contact Info */}
@@ -64,7 +64,7 @@ export function ContactHero() {
             <div className="p-2 rounded-lg bg-primary/10">
               <Mail className="w-5 h-5 text-primary" />
             </div>
-            <span className="text-foreground">mukesh@theqbitlabs.com</span>
+            <span className="text-foreground">mukesh1q2@gmail.com</span>
           </div>
           <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm">
             <div className="p-2 rounded-lg bg-cyan-500/10">

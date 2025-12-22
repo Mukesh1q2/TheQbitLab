@@ -50,9 +50,60 @@ const navigation = {
   ],
 }
 
+// System Telemetry Component
+function SystemTelemetry() {
+  return (
+    <div className="border-t border-white/5 bg-black/20 backdrop-blur-md py-2 px-4">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-[10px] md:text-xs font-mono text-muted-foreground/60 tracking-wider uppercase">
+
+        {/* System Status */}
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>SYS: ONLINE</span>
+        </div>
+
+        {/* Latency (Mocked for vibe) */}
+        <div className="hidden sm:flex items-center gap-2">
+          <span>LATENCY: 12ms</span>
+          <span className="text-primary/40">|</span>
+          <span>MEM: OPTIMAL</span>
+        </div>
+
+        {/* Vibe Level */}
+        <div className="flex items-center gap-2">
+          <span>VIBE:</span>
+          <div className="h-1 w-12 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full w-[98%] bg-gradient-to-r from-primary to-cyan-400 animate-pulse" />
+          </div>
+          <span>100%</span>
+        </div>
+
+        {/* Location & Time */}
+        <div className="flex items-center gap-2 ml-auto">
+          <span>DELHI, IN</span>
+          <span className="text-primary/40">::</span>
+          <Clock />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Clock() {
+  // Simple hydration-safe clock
+  return (
+    <span suppressHydrationWarning>
+      {new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })} UTC+5:30
+    </span>
+  )
+}
+
 export function Footer() {
   return (
-    <footer className="bg-background border-t border-white/10">
+    <footer className="bg-background border-t border-white/10 relative z-10">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
@@ -65,8 +116,9 @@ export function Footer() {
               </span>
             </div>
             <p className="text-muted-foreground text-base">
-              AI Engineer & Full-Stack Developer specializing in cutting-edge AI solutions,
-              web applications, and innovative digital experiences.
+              I don't chase trends.
+              <br />
+              I build systems that outlive them.
             </p>
             <div className="flex space-x-4">
               {navigation.social.map((item) => (
@@ -142,6 +194,9 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* System Status Bar */}
+      <SystemTelemetry />
     </footer>
   )
 }

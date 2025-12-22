@@ -28,8 +28,8 @@ interface Project {
 const projects: Project[] = [
   {
     id: 'quantgrid',
-    title: 'QuantGrid — AI-Powered Trading Platform',
-    description: 'QuantGrid is an enterprise-grade, AI-powered energy trading and optimization platform featuring real-time analytics, visual knowledge graphs, and automated bidding strategies. Features ML models for predictive analytics, Kafka + WebSocket streaming.',
+    title: 'QuantGrid — AI-Powered Trading',
+    description: 'What it is: An enterprise-grade AI energy trading platform. Why I built it: To prove that ML models can handle real-time financial stakes. Different: Kafka streaming & visual knowledge graphs, not just static dashboards.',
     image: '/images/projects/optibid-energy.jpg',
     category: 'saas',
     techStack: ['Next.js 14', 'TypeScript', 'Kafka', 'WebSocket', 'Docker', 'Kubernetes', 'ML/AI'],
@@ -40,8 +40,8 @@ const projects: Project[] = [
   },
   {
     id: 'brahm-ai',
-    title: 'Brahm AI — The "Deep Philosophy" Experiment',
-    description: 'This is where I get a bit experimental. It\'s an AI framework inspired by Vedic systems and vibrational computing. Moving beyond standard "if-this-then-that" logic to simulate higher-order cognition—a mix of symbolic AI and neural hybrids that explores how an AI might "perceive" or "remember" like a conscious entity.',
+    title: 'Brahm AI — Consciousness Framework',
+    description: 'What it is: A production-focused AI system designed to reason, adapt, and interact. Why I built it: I wanted to explore how symbolic thinking, neural systems, and memory structures can coexist. Different: Not a chatbot—a system. Modular architecture. Performance-aware.',
     image: '/images/projects/brahm-ai.jpg',
     category: 'ai',
     techStack: ['Python', 'PyTorch', 'React 19', 'TypeScript', 'Firebase'],
@@ -53,8 +53,8 @@ const projects: Project[] = [
   },
   {
     id: 'vedaq-ai',
-    title: 'VedaQ AI — Spiritual Tech',
-    description: 'A full-stack app that brings ancient wisdom into the 21st century. It\'s got everything: karma-scoring algorithms, mantra playback, and an LLM that speaks English, Hindi, and "Hinglish." Coolest part: It generates custom images and music based on your journaling—basically a digital spiritual guide in your pocket.',
+    title: 'VedaQ AI — Spiritual Intelligence',
+    description: 'What it is: Spiritual tech meeting Generative AI. Why I built it: To see if AI can handle cultural nuance and "Hinglish" context. Different: Generates custom media based on journaling. A digital guide, not just a search bar.',
     image: '/images/projects/vedaq-ai.jpg',
     category: 'ai',
     techStack: ['Next.js', 'OpenAI API', 'Firebase', 'TailwindCSS', 'Framer Motion'],
@@ -66,8 +66,8 @@ const projects: Project[] = [
   },
   {
     id: 'neurosymbiotic-codemind',
-    title: 'NeuroSymbiotic CodeMind — The Self-Evolving Lab',
-    description: 'Ever wanted to see AI agents mutate and learn in real-time? I built this interactive environment using D3.js to visualize agent lineages. It\'s a playground where agents interact, evolve, and talk back to you. It looks like a sci-fi movie, but it runs on solid React 19 architecture.',
+    title: 'NeuroSymbiotic — Evolution Lab',
+    description: 'What it is: A self-evolving laboratory for AI agents. Why I built it: To visualize intelligence emerging from chaos. Different: Real-time D3.js lineage tracking. Agents that talk back and evolve.',
     image: '/images/projects/neurosymbiotic.jpg',
     category: 'ai',
     techStack: ['React 19', 'D3.js', 'TypeScript', 'Node.js', 'WebSocket'],
@@ -79,7 +79,7 @@ const projects: Project[] = [
   {
     id: 'quantum-playground',
     title: 'The Quantum Playground',
-    description: 'A high-end, visual-heavy website designed to make quantum mechanics look as cool as it sounds. Matrix-style typography and 3D qubit simulations using Three.js. It\'s mostly eye candy, but the math under the hood is real—and it makes physics concepts actually understandable.',
+    description: 'What it is: A high-end visual simulation of quantum mechanics. Why I built it: To make physics concepts actually understandable. Different: Matrix-style typography and real 3D qubit simulations. Math under the hood is real.',
     image: '/images/projects/quantum-playground.jpg',
     category: 'web',
     techStack: ['React', 'Three.js', 'WebGL', 'Framer Motion', 'TypeScript'],
@@ -91,8 +91,8 @@ const projects: Project[] = [
   },
   {
     id: 'ocr-system',
-    title: 'The "Everything-to-Data" OCR System',
-    description: 'Businesses love messy PDFs and handwritten notes; developers hate them. I built a pipeline that fixes that. Uses Vision Transformers to pull structured data out of chaotic medical records and invoices with scary-good accuracy. The kind of boring-but-vital infrastructure that keeps the lights on.',
+    title: 'Everything-to-Data OCR',
+    description: 'What it is: A pipeline that pulls structured data from chaotic documents. Why I built it: Because businesses drown in PDF mess. Different: Uses Vision Transformers. High accuracy on medical records.',
     image: '/images/projects/ocr-system.jpg',
     category: 'ai',
     techStack: ['Python', 'Vision Transformers', 'FastAPI', 'Docker', 'GCP'],
@@ -103,8 +103,8 @@ const projects: Project[] = [
   },
   {
     id: 'novagen-automation',
-    title: 'NovaGen Automation — Industrial Tech',
-    description: 'A premium industrial automation company website built for an ISO 9001:2015 certified solutions provider. Features an AI-powered chatbot using Gemini API, dual light/dark themes, glassmorphism UI with micro-animations, and interactive product catalog showcasing Siemens, Yaskawa, Mitsubishi & Delta products.',
+    title: 'NovaGen Automation',
+    description: 'What it is: Premium industrial automation website. Why I built it: To modernize the face of industrial tech. Different: Glassmorphism in a boring industry. AI chatbot integration.',
     image: '/images/projects/novagen-automation.jpg',
     category: 'web',
     techStack: ['HTML5', 'CSS3', 'JavaScript', 'Gemini API', 'Vercel'],
@@ -115,7 +115,7 @@ const projects: Project[] = [
   {
     id: 'synthesis',
     title: 'Synthesis — Cognitive Commons',
-    description: 'A revolutionary platform that transforms how groups make complex decisions by creating a "cognitive commons" where AI enhances human reasoning. Features real-time AI insights, evidence analysis, structured protocols, and collective wisdom generation for collaborative decision-making.',
+    description: 'What it is: A platform for AI-enhanced collaborative decision making. Why I built it: To augment human reasoning with collective wisdom. Different: Structured protocols + real-time AI insights.',
     image: '/images/projects/synthesis.jpg',
     category: 'ai',
     techStack: ['Next.js', 'TypeScript', 'OpenAI API', 'Real-time Collaboration', 'Firebase'],
@@ -125,8 +125,8 @@ const projects: Project[] = [
   },
   {
     id: 'lims',
-    title: 'LIMS — Library & Institute Management',
-    description: 'Comprehensive Library & Institute Management System with student tracking, attendance, fees, library, seating management, and analytics. Features real-time dashboard with attendance trends, fee collection tracking, book management, and locker assignments.',
+    title: 'LIMS System',
+    description: 'What it is: Comprehensive management system for institutes. Why I built it: To streamline complex admin workflows. Different: Real-time dashboard with attendance and fee tracking.',
     image: '/images/projects/lims.jpg',
     category: 'saas',
     techStack: ['Next.js', 'TypeScript', 'Firebase', 'TailwindCSS', 'Chart.js'],
@@ -136,8 +136,8 @@ const projects: Project[] = [
   },
   {
     id: 'konnichiwa',
-    title: 'Konnichiwa Japan & Namaste India',
-    description: 'A dual-brand cultural festival website showcasing Konnichiwa Japan (Japanese culture in India) and Namaste India (Indian culture in Japan) festivals. Features event listings, ticket booking, gallery, magazine, and interactive cultural experiences.',
+    title: 'Konnichiwa Japan',
+    description: 'What it is: A dual-brand cultural festival platform. Why I built it: To bridge Indian and Japanese cultures digitally. Different: Interactive cultural experiences and magazine-style layout.',
     image: '/images/projects/konnichiwa.jpg',
     category: 'web',
     techStack: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Vercel'],
@@ -179,7 +179,7 @@ export function FeaturedWork() {
             theme.id === 'neumorphic' && 'text-gray-700',
             theme.id === 'vaporwave' && 'holographic font-display'
           )}>
-            🚀 Projects (The "Proof" Section)
+            🚀 Featured Systems ("Not Demos")
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Talk is cheap. Here's what I've actually built—from consciousness-inspired AI frameworks
@@ -375,7 +375,7 @@ export function FeaturedWork() {
                     {project.title}
                   </h3>
 
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-4 leading-relaxed">
                     {project.description}
                   </p>
 

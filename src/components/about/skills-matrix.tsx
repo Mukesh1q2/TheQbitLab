@@ -67,11 +67,11 @@ export function SkillsMatrix() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-primary via-cyan-400 to-primary bg-clip-text text-transparent">
-              Technical Expertise
+              My Stack Is a System
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills across AI, web development, and emerging technologies.
+            I don't treat technologies as isolated tools. I think in systems — how data flows, how decisions propagate, and how performance holds under stress. The skills you see here aren't just things I "know." They're things I've used in production.
           </p>
         </motion.div>
 

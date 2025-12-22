@@ -31,7 +31,7 @@ export function AboutHero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
         >
           <User className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-primary">About Me</span>
+          <span className="text-sm font-medium text-primary">Philosophy</span>
         </motion.div>
 
         <motion.h1
@@ -41,7 +41,7 @@ export function AboutHero() {
           className="text-4xl md:text-6xl font-bold mb-6"
         >
           <span className="bg-gradient-to-r from-primary via-cyan-400 to-primary bg-clip-text text-transparent">
-            Mukesh Kumar
+            How I Think
           </span>
         </motion.h1>
 
@@ -51,9 +51,7 @@ export function AboutHero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed"
         >
-          I'm a multidisciplinary developer exploring the intersection of
-          <span className="text-primary font-medium"> ancient wisdom</span> and
-          <span className="text-cyan-400 font-medium"> modern AI</span>.
+          I'm not interested in building demos that look good in screenshots. I care about systems that survive real users, real data, and real scale.
         </motion.p>
 
         <motion.p
@@ -62,10 +60,11 @@ export function AboutHero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto"
         >
-          With a background in Deep Learning, Computer Vision, and Full-Stack Development,
-          I build AI systems that feel <span className="text-primary font-semibold">alive</span>—clean,
-          reliable, and human-centered. From architecting self-evolving AI environments to building
-          specialized LLM tools, I create technology that learns and adapts.
+          My work sits at the intersection of AI engineering, Full-stack systems, Product thinking, and Performance-aware design.
+          <br /><br />
+          I enjoy taking complex ideas — neural networks, data pipelines, distributed systems — and turning them into tools people can actually use.
+          <br /><br />
+          <span className="font-bold text-primary text-xl block mt-4">Good software is calm. Great software thinks.</span>
         </motion.p>
 
         <motion.div

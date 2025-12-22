@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { useAppStore, THEMES, Theme, ThemeCustomization } from '@/store/app-store'
 
 export function SettingsPanel() {
-    const [activeTab, setActiveTab] = useState<'themes' | 'display' | 'effects'>('themes')
+    const [activeTab, setActiveTab] = useState<'themes' | 'interfaces' | 'display' | 'effects'>('themes')
 
     const {
         theme,
@@ -120,7 +120,7 @@ export function SettingsPanel() {
                                     <div className="text-left">
                                         <div className="font-medium text-foreground">Performance Mode</div>
                                         <div className="text-xs text-muted-foreground">
-                                            {performanceMode ? 'All effects disabled' : 'Disable all heavy effects instantly'}
+                                            {performanceMode ? 'Visual effects are optional. Performance is not.' : 'Reflects how I build real software — scalable & fast.'}
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ export function SettingsPanel() {
 
                         {/* Tabs */}
                         <div className="flex border-b border-border">
-                            {(['themes', 'display', 'effects'] as const).map((tab) => (
+                            {(['interfaces', 'display', 'effects'] as const).map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
@@ -152,7 +152,7 @@ export function SettingsPanel() {
                                     aria-selected={activeTab === tab}
                                     aria-controls={`tabpanel-${tab}`}
                                 >
-                                    {tab === 'themes' && 'Themes'}
+                                    {tab === 'interfaces' && 'Interfaces'}
                                     {tab === 'display' && 'Display'}
                                     {tab === 'effects' && 'Effects'}
                                 </button>
@@ -162,8 +162,12 @@ export function SettingsPanel() {
                         {/* Content */}
                         <div className="flex-1 overflow-y-auto p-4">
                             {/* Themes Tab */}
-                            {activeTab === 'themes' && (
+                            {/* Renamed internal state logic to 'interfaces' for display but keeping code consistent */}
+                            {(activeTab === 'themes' || activeTab === 'interfaces') && (
                                 <div className="space-y-6">
+                                    <div className="p-3 bg-secondary/30 rounded-lg text-sm text-muted-foreground mb-4">
+                                        This portfolio supports multiple visual modes — not as themes, but as interfaces. Each mode reflects a different way of thinking.
+                                    </div>
                                     {/* Live Preview indicator */}
                                     {previewTheme && (
                                         <div className="p-3 rounded-lg bg-accent/10 border border-accent/30 flex items-center gap-2">
@@ -177,7 +181,7 @@ export function SettingsPanel() {
                                     <section>
                                         <div className="flex items-center gap-2 mb-4">
                                             <Palette className="w-5 h-5 text-primary" />
-                                            <h3 className="font-medium text-foreground">Select Theme</h3>
+                                            <h3 className="font-medium text-foreground">Choose Your Interface</h3>
                                             <span className="text-xs text-muted-foreground ml-auto">Hover to preview</span>
                                         </div>
                                         <div

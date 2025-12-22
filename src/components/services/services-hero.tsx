@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import { Zap, Code, Smartphone, Brain } from 'lucide-react'
 
 const services = [
-  { icon: Brain, title: 'AI Development', description: 'Custom AI solutions' },
-  { icon: Code, title: 'Web Development', description: 'Modern web applications' },
-  { icon: Smartphone, title: 'Mobile Apps', description: 'iOS and Android apps' },
-  { icon: Zap, title: 'Consulting', description: 'Technical guidance' }
+  { icon: Brain, title: 'AI System Design', description: 'From idea to deployable intelligence' },
+  { icon: Code, title: 'Full-Stack Engineering', description: 'Frontend, backend, data, and deployment — end to end' },
+  { icon: Smartphone, title: 'Product Prototyping', description: 'Turning complex ideas into usable products' },
+  { icon: Zap, title: 'Technical Consulting', description: 'Architecture, performance, and scalability guidance' }
 ]
 
 export function ServicesHero() {
@@ -20,12 +20,12 @@ export function ServicesHero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Our Services
+            How I Can Help
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            Comprehensive technology services to accelerate your digital transformation.
+            If your problem is complex — I'm interested.
           </p>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => {
               const IconComponent = service.icon

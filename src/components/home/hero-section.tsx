@@ -134,11 +134,10 @@ export function HeroSection() {
           <div className="space-y-4">
             <TypewriterText
               texts={[
-                'AI Engineer',
-                'Full-Stack Developer',
-                'LLM Architect',
-                'System Designer',
-                'Problem Solver'
+                'I build AI that actually works',
+                'Engineering intelligence',
+                'From neural ideas to production',
+                'Systems that think and scale'
               ]}
               className={cn(
                 'text-4xl sm:text-6xl lg:text-7xl font-bold',
@@ -156,18 +155,11 @@ export function HeroSection() {
               transition={{ delay: 1 }}
               className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             >
-              I build{' '}
-              <span className="font-semibold text-primary">
-                AI that actually works
-              </span>
-              {' '}(and Full-Stack apps that don't break). Most people talk about AI like it's magic—I treat it like{' '}
-              <span className="font-semibold text-primary">
-                engineering
-              </span>
-              . I bridge the gap between "That's a cool research paper" and{' '}
-              <span className="font-semibold text-primary">
-                "Here's a product people can use."
-              </span>
+              I design and engineer intelligent systems and full-stack applications that don't break in production. Most people talk about AI like it's magic. I treat it like
+              <span className="font-semibold text-primary"> engineering</span>.
+              <br /><br />
+              I bridge the gap between "this is a cool idea" and
+              <span className="font-semibold text-primary"> "this is a product people actually use."</span>
             </motion.p>
           </div>
 
@@ -218,42 +210,56 @@ export function HeroSection() {
             <SkillConstellation />
           </motion.div>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col gap-6 items-center"
           >
-            <motion.a
-              href="/projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={cn(
-                'inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all',
-                theme.id === 'quantum' && 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/25',
-                theme.id === 'terminal' && 'bg-terminal-green text-black border-2 border-terminal-green',
-                theme.id === 'minimalist' && 'bg-black text-white',
-                theme.id === 'neumorphic' && 'neumorphic-button text-primary-foreground bg-primary',
-                theme.id === 'vaporwave' && 'bg-gradient-to-r from-vaporwave-pink to-vaporwave-cyan text-white'
-              )}
-            >
-              View My Work
-              <ChevronDown className="ml-2 w-5 h-5 rotate-[-90deg]" />
-            </motion.a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.a
+                href="/projects"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={cn(
+                  'inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all',
+                  theme.id === 'quantum' && 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/25',
+                  theme.id === 'terminal' && 'bg-terminal-green text-black border-2 border-terminal-green',
+                  theme.id === 'minimalist' && 'bg-black text-white',
+                  theme.id === 'neumorphic' && 'neumorphic-button text-primary-foreground bg-primary',
+                  theme.id === 'vaporwave' && 'bg-gradient-to-r from-vaporwave-pink to-vaporwave-cyan text-white'
+                )}
+              >
+                Explore My Systems
+                <ChevronDown className="ml-2 w-5 h-5 rotate-[-90deg]" />
+              </motion.a>
 
-            <motion.a
-              href="/contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={cn(
-                'inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all',
-                'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-              )}
+              <motion.a
+                href="/contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={cn(
+                  'inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all',
+                  'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
+                )}
+              >
+                Work With Me
+                <Mail className="ml-2 w-5 h-5" />
+              </motion.a>
+            </div>
+
+            {/* Interaction Guidance */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 3 }}
+              className="text-sm text-muted-foreground/80 max-w-md text-center backdrop-blur-sm bg-background/30 p-4 rounded-xl border border-primary/10"
             >
-              Contact Me
-              <Mail className="ml-2 w-5 h-5" />
-            </motion.a>
+              <span className="block mb-2 font-semibold text-primary">⚡ This portfolio is interactive.</span>
+              You can switch themes, enable visual effects, explore neural animations, and tune performance.
+              <br />
+              <span className="block mt-2 font-medium">👉 Open Theme Settings and play with the system.</span>
+            </motion.div>
           </motion.div>
 
           {/* Social Links */}
