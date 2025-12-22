@@ -20,15 +20,15 @@ const stats: Stat[] = [
   {
     id: 'projects',
     label: 'Projects Completed',
-    value: 47,
-    suffix: '+',
+    value: 15,
+    suffix: '',
     icon: '🚀',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     id: 'clients',
     label: 'Happy Clients',
-    value: 23,
+    value: 5,
     suffix: '+',
     icon: '😊',
     color: 'from-green-500 to-emerald-500',

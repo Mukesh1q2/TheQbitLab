@@ -24,19 +24,19 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'optibid-energy',
-    title: 'OptiBid Energy — AI-Powered Trading Platform',
-    description: 'Revolutionary enterprise-grade platform for real-time energy analytics, intelligent bidding, and visual knowledge graphs. Features ML models (TFT, N-BEATS, DeepAR) for predictive analytics, Kafka + WebSocket streaming, and multi-tenant enterprise security.',
+    id: 'quantgrid',
+    title: 'QuantGrid — AI-Powered Trading Platform',
+    description: 'QuantGrid is an enterprise-grade, AI-powered energy trading and optimization platform featuring real-time analytics, visual knowledge graphs, and automated bidding strategies. Features ML models for predictive analytics and Kafka + WebSocket streaming.',
     category: 'SaaS',
     tech: ['Next.js 14', 'TypeScript', 'Kafka', 'WebSocket', 'Docker', 'Kubernetes', 'ML/AI'],
     status: 'Completed',
-    rating: 4.9,
-    views: 8750,
-    date: '2024-12-18',
+    rating: 5.0,
+    views: 9240,
+    date: '2024-12-22',
     image: '/images/projects/optibid-energy.jpg',
     featured: true,
-    demoUrl: 'https://optibid.theqbitlabs.com',
-    caseStudyUrl: '/case-studies/optibid-energy'
+    demoUrl: 'https://quantgrid.theqbitlabs.com/',
+    caseStudyUrl: '/case-studies/quantgrid'
   },
   {
     id: 'brahm-ai',

@@ -14,12 +14,12 @@ You are powered by Gemini 3.0 Flash (Preview).
 ## About Mukesh Kumar
 - AI Engineer & Full-Stack Developer based in New Delhi, India
 - 5+ years of experience in AI/ML and web development
-- Contact: mukesh@theqbitlabs.com | +91-9716966182
+- Contact: mukesh1q2@gmail.com | +91-9716966182
 - LinkedIn: linkedin.com/in/mukeshkumarpandey
 - GitHub: github.com/Mukesh1q2
 
 ## Key Projects
-1. OptiBid Energy: AI energy trading (Next.js, Kafka, ML)
+1. QuantGrid: AI energy trading (Next.js, Kafka, ML)
 2. Brahm AI: Vedic-inspired AI framework (Consciousness simulation)
 3. VedaQ AI: Spiritual tech + Generative AI
 4. Synthesis: Cognitive collective intelligence

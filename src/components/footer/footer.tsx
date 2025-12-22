@@ -30,7 +30,7 @@ const navigation = {
     },
     {
       name: 'Email',
-      href: 'mailto:mukesh@theqbitlabs.com',
+      href: 'mailto:mukesh1q2@gmail.com',
       icon: Mail,
     },
   ],
@@ -45,7 +45,7 @@ const navigation = {
     },
     {
       icon: Mail,
-      text: 'mukesh@theqbitlabs.com',
+      text: 'mukesh1q2@gmail.com',
     },
   ],
 }
